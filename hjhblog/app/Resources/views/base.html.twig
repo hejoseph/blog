@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
+        <title>{% block title %}HJHBlog{% endblock %} - hjhblog</title>
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        {% block stylesheets %}
+            <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
+            <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
+
+            <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+            {# {% stylesheets
+                'css/*'
+            %}
+                <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+            {% endstylesheets %} #}
+
+            <link href="{{ asset('bootstrap-3.3.5-dist/css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
+            <link href="{{ asset('css/footer.css') }}" type="text/css" rel="stylesheet" />
+            <link href="{{ asset('css/blog.css') }}" type="text/css" rel="stylesheet" />
+            <link href="{{ asset('css/screen.css') }}" type="text/css" rel="stylesheet" />
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            {# // <script src="{{ asset('bootstrap-3.3.5-dist/js/bootstrap.min.js')}}"></script> #}
+        {% endblock %}
+
+        
+
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+
+
+    
+</head>
+<body id="corps">
+    <div id="body-content">
+      <!--   <section id="wrapper">
+          <header id="header"> -->
+{# navbar-fixed-top #}
+                <div class="navbar navbar-inverse ">
+                  <div class="container">
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="{{ path('BlogBundle_homepage') }}">何家豪Blog</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        {% block navigation %}
+                        <nav>
+                          <ul class="nav navbar-nav">
+                            <li class="active"><a href="{{ path('BlogBundle_homepage') }}">Home</a></li>
+                            <li><a href="{{ path('BlogBundle_about') }}">About</a></li>
+                            <li><a href="{{ path('BlogBundle_contact') }}">Contact</a></li>
+                          </ul>
+
+                          <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                          </ul>
+                        </nav>
+                        {% endblock %}
+                    </div><!--/.nav-collapse -->
+                  </div>
+                </div>
+
+                {# <div class="container">
+                  
+                  <div class="text-center">
+                    <h1>Bootstrap starter template</h1>
+                    <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+                  </div>
+                  
+                </div><!-- /.container --> #}
+
+                {# <div class="top">
+                    {% block navigation %}
+
+
+
+
+                        <nav>
+                            <ul class="navigation">
+                                <li><a href="{{ path('BloggerBlogBundle_homepage') }}">Home</a></li>
+            <li><a href="{{ path('BloggerBlogBundle_about') }}">About</a></li>
+                                <li><a href="{{ path('BloggerBlogBundle_contact') }}">Contact</a></li>
+                            </ul>
+                        </nav>
+                    {% endblock %}
+                </div> #}
+                {# <hgroup>
+                    <h2>{% block blog_title %}<a href="{{ path('BlogBundle_homepage') }}">WTFBlog</a>{% endblock %}</h2> #}
+    <h3>{# {% block blog_tagline %} #}{# <a href="{{ path('BlogBundle_homepage') }}">creating a blog in Symfony2</a> #}{# {% endblock %} #}</h3>
+               {#  </hgroup> #}
+                
+           <!--  </header>
+           
+                   </section> -->
+            
+
+
+        
+            <div class="container">
+                <section class="main-col">
+                    {% block body %}{% endblock %}
+                </section>
+                <aside class="sidebar">
+                    {% block sidebar %}{% endblock %}
+                </aside>
+
+            </div>
+
+
+
+
+
+
+            
+
+        
+
+
+        <footer class="footer footer-distributed pull-bottom ">
+
+                        <div class="footer-left">
+
+                            <div><img src="{{ asset('images/wtf.png') }}" /></div>
+
+                            <p class="footer-links">
+                                <a href="#">Home</a>
+                                ·
+                                <a href="#">Blog</a>
+                                ·
+                                <a href="#">Pricing</a>
+                                ·
+                                <a href="#">About</a>
+                                ·
+                                <a href="#">Faq</a>
+                                ·
+                                <a href="#">Contact</a>
+                            </p>
+
+                            <p class="footer-company-name">Company Name &copy; 2015</p>
+
+                            <div class="footer-icons">
+
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-github"></i></a>
+
+                            </div>
+
+                        </div>
+
+                        <div class="footer-right">
+
+                <form method="get" action="#">
+                    <i class="fa fa-search"></i>
+                    <input placeholder="Search our website" name="search" />
+                    
+                </form>
+
+            </div>
+
+                    </footer>
+
+
+
+    </div>
+{#}
+    {% block javascripts %}
+        <script src="{{ asset('bootstrap-3.3.5-dist/js/bootstrap.js') }}" type="text/javascript"/>
+    {% endblock %}
+#}
+</body>
+</html>

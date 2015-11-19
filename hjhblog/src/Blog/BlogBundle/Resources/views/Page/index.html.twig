@@ -1,0 +1,36 @@
+{% extends 'BlogBundle::layout.html.twig' %}
+
+{% block body %}
+    {# Home #}
+    <div class="container col-sm-8">
+      <div class="row">
+        {% for blog in blogs %}
+        <div class="col-sm-6">
+          <div id="myCarousel-{{blog.id}}" class="carousel slide article_home" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <img src="http://placehold.it/800x400?text=IMAGE" alt="Image"/>
+                <div class="carousel-caption">
+                  <p><a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}">{{blog.title}}</a></p>
+                  <p>Money Money.</p>
+                </div>  
+
+              </div>
+            </div>
+          </div>
+          <p><span class="glyphicon glyphicon-fire"></span> {{blog.popularity}} <span class="glyphicon glyphicon-comment"></span> {% render(controller("BlogBundle:Blog:show", {'id':blog.id, 'case':true}))%}</p>
+        </div>
+
+        {% else %}
+            <p>No Posts for the moment,</p>
+        {% endfor %}
+      </div>
+      <hr>
+    </div>
+
+
+    
+
+    
+{% endblock %}
