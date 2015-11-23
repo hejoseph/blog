@@ -1,4 +1,4 @@
-/* .blogger-notice { text-align: center; padding: 10px; background: #DFF2BF; border: 1px solid; color: #4F8A10; margin-bottom: 10px; }
+ .blogger-notice { text-align: center; padding: 10px; background: #DFF2BF; border: 1px solid; color: #4F8A10; margin-bottom: 10px; }
 form.blogger { font-size: 16px; }
 form.blogger div { clear: left; margin-bottom: 10px; }
 form.blogger label { float: left; margin-right: 10px; text-align: right; width: 100px; font-weight: bold; vertical-align: top; padding-top: 10px; }
@@ -24,4 +24,4 @@ form.blogger ul li { color: #ff0000; margin-bottom: 5px; }
 .comments .comment { padding: 20px; }
 .comments .comment p { margin-bottom: 0; }
 .comments h3 { background: #eee; padding: 10px; font-size: 20px; margin-bottom: 20px; clear: both; }
-.comments .previous-comments { margin-bottom: 20px; } */
+.comments .previous-comments { margin-bottom: 20px; } 

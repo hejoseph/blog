@@ -52,7 +52,7 @@ class Blog
     private $image;
 
     /**
-    * @ORM\OneToOne(targetEntity="Picture", cascade={"persist"})
+    * @ORM\OneToOne(targetEntity="Image", cascade={"persist"})
     * @ORM\JoinColumn(nullable=true)
     */
     private $picture;
@@ -65,7 +65,7 @@ class Blog
 
     /**
     * @ORM\ManytoOne(targetEntity="Blogger\BloggerBundle\Entity\Blogger", inversedBy="blog")
-    * @ORM\JoinColumn(nullable=false, name="blogger_id", referencedColumnName="id")
+    * @ORM\JoinColumn(nullable=false)
     */
     private $blogger;
 
@@ -144,12 +144,9 @@ class Blog
      *
      * @return string
      */
-    public function getTitle($length = null)
+    public function getTitle()
     {
-        if (false === is_null($length) && $length > 0)
-            return substr($this->title, 0, $length);
-        else
-            return $this->title;
+        return $this->title;
     }
 
     /**
@@ -381,77 +378,5 @@ class Blog
         $this->popularity = $popularity;
 
         return $this;
-    }
-
-    /**
-     * Set picture
-     *
-     * @param \Blog\BlogBundle\Entity\Image $picture
-     *
-     * @return Blog
-     */
-    public function setPicture(\Blog\BlogBundle\Entity\Picture $picture = null)
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
-    /**
-     * Get picture
-     *
-     * @return \Blog\BlogBundle\Entity\Image
-     */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    /**
-     * Set category
-     *
-     * @param \Blog\BlogBundle\Entity\Category $category
-     *
-     * @return Blog
-     */
-    public function setCategory(\Blog\BlogBundle\Entity\Category $category)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return \Blog\BlogBundle\Entity\Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * Set blogger
-     *
-     * @param \Blogger\BloggerBundle\Entity\Blogger $blogger
-     *
-     * @return Blog
-     */
-    public function setBlogger(\Blogger\BloggerBundle\Entity\Blogger $blogger)
-    {
-        $this->blogger = $blogger;
-
-        return $this;
-    }
-
-    /**
-     * Get blogger
-     *
-     * @return \Blogger\BloggerBundle\Entity\Blogger
-     */
-    public function getBlogger()
-    {
-        return $this->blogger;
     }
 }

@@ -30,4 +30,16 @@ class BlogRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()
                   ->getResult();
     }
+
+    public function getLatestBlogsFromBlogger($blogger_id){
+        $qb = $this->createQueryBuilder('b')
+                   ->select('b')
+                   ->where("b.blogger = :blogger_id")
+                   ->setParameter("blogger_id", $blogger_id);
+        return $qb->getQuery()
+                  ->getResult();
+
+    }
+
+
 }

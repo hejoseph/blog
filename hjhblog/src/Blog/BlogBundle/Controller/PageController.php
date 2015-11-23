@@ -63,4 +63,40 @@ class PageController extends Controller
         ));
     }
 
+    public function bloggerBlogsAction($blogger_id){
+        $em = $this->getDoctrine()
+                   ->getEntityManager();
+        $blogger = $em->getRepository('BloggerBundle:Blogger')->find($blogger_id);
+        if (!$blogger) {
+            throw $this->createNotFoundException('Unable to find the Blogger, he doesn\'t exist.');
+        }
+
+        $blogs = $em->getRepository('BlogBundle:Blog')
+                   ->getLatestBlogsFromBlogger($blogger->getId());
+
+        return $this->render('BlogBundle:Blogger:show_blogger_blogs.html.twig', array(
+            'blogger'  => $blogger,
+            'blogs'    => $blogs
+        ));
+    }
+
+
+    public function searchAction(){
+        return $this->render('BlogBundle:Page:search.html.twig', array(
+            // 'blogs'    => $blogs
+        ));
+    }
+
+    public function profileAction($blogger_id){
+        $em = $this->getDoctrine()
+                   ->getEntityManager();
+        $blogger = $em->getRepository('BloggerBundle:Blogger')->find($blogger_id);
+        if (!$blogger) {
+            throw $this->createNotFoundException('Unable to find the Blogger, he doesn\'t exist.');
+        }
+        return $this->render('BlogBundle:Blogger:profile.html.twig', array(
+            'blogger'    => $blogger
+        ));
+    }
+
 }

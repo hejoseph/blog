@@ -1,0 +1,28 @@
+<?php
+// src/Acme/UserBundle/Entity/User.php
+
+namespace Blogger\BloggerBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="bloggerinfo")
+ * @ORM\Entity(repositoryClass="Blogger\BloggerBundle\Repository\BloggerInfoRepository")
+ */
+class BloggerInfo
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+    * @ORM\ManytoOne(targetEntity="Blogger\BloggerBundle\Entity\Blogger", inversedBy="info",cascade={"persist"})
+    * @ORM\JoinColumn(nullable=true)
+    */
+    private $blogger;
+
+}

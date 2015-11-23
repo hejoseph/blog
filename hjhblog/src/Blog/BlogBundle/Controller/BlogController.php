@@ -3,7 +3,8 @@
 namespace Blog\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Blog\BlogBundle\Form\BlogType;
+use Blog\BlogBundle\Entity\Blog;
 /**
  * Blog controller.
  */
@@ -34,5 +35,66 @@ class BlogController extends Controller
             'blog'      => $blog,
             "comments"  => $comments
         ));
+    }
+
+    public function editAction($blog_id){
+        $em = $this->getDoctrine()->getEntityManager();
+        $blog = $em->getRepository('BlogBundle:Blog')->find($blog_id);
+        if (!$blog) {
+            throw $this->createNotFoundException('Unable to find Blog post.');
+        }
+
+        $form = $this->createForm(new BlogType(), $blog);
+
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()
+                       ->getEntityManager();
+                $blog->setUpdated(new \DateTime());
+                $em->persist($blog);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('BlogBundle_blog_show', array(
+                    'id' => $blog->getId()))
+                );
+            }
+        }
+
+        return $this->render('BlogBundle:Blog:edit.html.twig', array(
+            'form' => $form->createView(),
+            'blog' => $blog
+    ));
+
+    }
+
+
+    public function createAction(){
+        $em = $this->getDoctrine()->getEntityManager();
+        $blog = new Blog();
+
+        $form = $this->createForm(new BlogType(), $blog);
+
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()
+                       ->getEntityManager();
+                $em->persist($blog);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('BlogBundle_homepage'));
+            }
+        }
+
+        return $this->render('BlogBundle:Blog:create.html.twig', array(
+            'form' => $form->createView()
+    ));
+
+    
     }
 }

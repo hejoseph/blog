@@ -17,7 +17,7 @@ BlogBundle_contact:
         _method:  POST|GET
 
 BlogBundle_blog_show:
-    pattern:  /{id}
+    pattern:  /blog/{id}
     defaults: { _controller: BlogBundle:Blog:show }
     requirements:
         _method:  GET
@@ -29,3 +29,39 @@ BlogBundle_comment_create:
     requirements:
         _method:  POST
         blog_id: \d+
+
+BlogBundle_blog_edit:
+    pattern: /blog/{blog_id}/edit
+    defaults: { _controller: BlogBundle:Blog:edit }
+    requirements:
+        _method:  GET|POST
+        blog_id: \d+
+
+BlogBundle_blog_create:
+    pattern: /blog/create
+    defaults: { _controller: BlogBundle:Blog:create }
+    requirements:
+        _method:  GET|POST
+        blog_id: \d+
+
+BlogBundle_blogger_blogs:
+    pattern:  /blogger/{blogger_id}/blogs
+    defaults: { _controller: BlogBundle:Page:bloggerBlogs }
+    requirements:
+        _method:  GET
+        id: \d+
+
+BlogBundle_blogger_profile:
+    pattern:  /blogger/{blogger_id}/profile
+    defaults: { _controller: BlogBundle:Page:profile }
+    requirements:
+        _method:  GET
+        id: \d+
+
+
+BlogBundle_blogger_search:
+    pattern:  /search
+    defaults: { _controller: BlogBundle:Page:search }
+    requirements:
+        _method:  GET
+        id: \d+

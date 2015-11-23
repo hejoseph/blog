@@ -1,8 +1,64 @@
 {% extends 'BlogBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+    {{parent()}}
+    <link href="{{ asset('bootstrap-3.3.5-dist/css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('css/footer.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('css/blog_user.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
 {% block body %}
+  
+    
+
     {# Home #}
     <div class="container col-sm-8">
+      
+      <ul class="nav nav-tabs" id="myTab">
+      <li class="active"><a href="#sent" data-toggle="tab"><span class="glyphicon glyphicon-th-large"></span></a></li>
+      <li><a href="#inbox" data-toggle="tab"><span class="glyphicon glyphicon-th"></span></a></li>
+    </ul>
+    
+
+
+    <div class="tab-content">
+      <div class="tab-pane" id="inbox">
+      <div class="row">
+          {% for blog in blogs %}
+                {% if loop.first %}
+                  <div class="row stylish-panel">
+                {% elseif loop.index0 is divisible by(3) %} 
+                  </div>
+                  <div class="row stylish-panel">
+                {% endif %}
+                <div class="col-md-4">
+                  <div>
+                    <img src="http://placehold.it/800X800" alt="Texto Alternativo" class="img-responsive img-circle img-thumbnail">
+                    <h4>
+                      <a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}">{{blog.title(40)}}...</a>
+                    </h4>
+                    <p>
+                      {{blog.content(100)}}...
+                    </p>
+                    <a href="{{ path("BlogBundle_blog_show", {'id' : blog.id})}}" class="btn btn-primary" title="See more">Read »</a> 
+                    <span class="glyphicon glyphicon-fire"></span> {{blog.popularity}} 
+                    <span class="glyphicon glyphicon-comment"></span> {% render(controller("BlogBundle:Blog:show", {'id':blog.id, 'case':true}))%} 
+                    <p>by <a href="{{ path('BlogBundle_blogger_blogs', {'blogger_id' : blog.blogger.id})}} ">{{blog.blogger.firstname}} {{blog.blogger.surname}}</a></p>
+                  </div>
+                </div>
+
+                {% if loop.last %}
+                    </div>
+                {% endif %}
+
+          {% else %}
+              No blogs available
+          {% endfor %}
+      </div>
+    </div>
+
+
+    <div class="tab-pane active" id="sent">
       <div class="row">
         {% for blog in blogs %}
         <div class="col-sm-6">
@@ -10,10 +66,10 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
               <div class="item active">
-                <img src="http://placehold.it/800x400?text=IMAGE" alt="Image"/>
+                <img src="http://placehold.it/800x400?text=IMAGE" alt="Image" height="400" width="800"/>
                 <div class="carousel-caption">
-                  <p><a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}">{{blog.title}}</a></p>
-                  <p>Money Money.</p>
+                  <h3><a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}">{{blog.title(40)}}...</a></h3>
+                  <p>by <a href="{{ path('BlogBundle_blogger_blogs', {'blogger_id' : blog.blogger.id})}} ">{{blog.blogger.firstname}} {{blog.blogger.surname}}</a></p>
                 </div>  
 
               </div>
@@ -22,15 +78,16 @@
           <p><span class="glyphicon glyphicon-fire"></span> {{blog.popularity}} <span class="glyphicon glyphicon-comment"></span> {% render(controller("BlogBundle:Blog:show", {'id':blog.id, 'case':true}))%}</p>
         </div>
 
+        
+
         {% else %}
             <p>No Posts for the moment,</p>
         {% endfor %}
       </div>
-      <hr>
     </div>
+  </div>
 
-
-    
+      <hr>
 
     
 {% endblock %}

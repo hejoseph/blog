@@ -1,0 +1,73 @@
+/*show blog in square*/
+.stylish-panel {
+    padding: 20px 0;
+    text-align: center;
+}
+.stylish-panel > div > div{
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+.stylish-panel > div:hover > div{
+    margin-top: -10px;
+    border: 1px solid rgb(200, 200, 200);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 2px;
+    background: rgba(200, 200, 200, 0.1);
+    transition: 0.5s;
+}
+
+.stylish-panel > div:hover img {
+    border-radius: 50%;
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+
+
+/* end show blog in square*/
+
+
+.pic
+{
+     margin-top:50px; 
+     width:120px;
+     margin-left:50px;
+     margin-bottom:-60px;
+}
+
+.panel
+{
+    background-image:url("http://autoimagesize.com/wp-content/uploads/2014/01/rainbow-aurora-background-wallpaper-colour-images-rainbow-background.jpg"); 
+}
+
+.name
+{
+    position:absolute;
+    padding-left:200px;
+    font-size:30px;
+}
+
+.dropdown
+{
+    position:absolute;
+}
+
+.change
+{
+ position:relative; 
+ bottom:20px;
+ padding:1px;
+ color:white;
+ text-decoration:none;
+}
+
+
+.change:hover
+{
+ text-decoration:none;
+ background-color:black;
+ color:white;
+}
