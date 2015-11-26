@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blog\BlogBundle\Entity\Enquiry;
 use Blog\BlogBundle\Form\EnquiryType;
 
+use Blog\BlogBundle\Entity\Search;
+use Blog\BlogBundle\Form\SearchType;
+
 class PageController extends Controller
 {
     public function indexAction()
@@ -82,9 +85,17 @@ class PageController extends Controller
 
 
     public function searchAction(){
-        return $this->render('BlogBundle:Page:search.html.twig', array(
-            // 'blogs'    => $blogs
+        $em = $this->getDoctrine()
+                   ->getEntityManager();
+        $blogs = $em->getRepository('BlogBundle:Blog')->getBlogsFromString($_GET["search"]);
+        // $blogger = $em->getRepository('BloggerBundle:Blogger')->findOneBySurname("admin");
+        // $blogger->addBlog($blogs);
+        // $blogs->setBlogger($blogger);
+        return $this->render('BlogBundle:Search:result.html.twig', array(
+            "blogs" => $blogs,
+            "get_search" => $_GET["search"]
         ));
+
     }
 
     public function profileAction($blogger_id){

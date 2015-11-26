@@ -1,6 +1,6 @@
 <?php
 
-namespace Blog\BlogBundle\Entity;
+namespace Blog\BlogBundle\Repository;
 
 /**
  * CategoryRepository

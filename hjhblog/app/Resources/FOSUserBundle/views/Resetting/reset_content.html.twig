@@ -1,8 +1,25 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <div class="account-wall">
+                <div id="my-tab-content" class="tab-content">
+                    <div class="tab-pane active" id="login">
+                        <form class="form-signin" action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" >
+                            {# {{ form_widget(form) }} #}
+                            {{ form_row(form.plainPassword.first, {'label':' ','attr':{'class': 'form-control','type':'texte','placeholder':'New password'}}) }}
+                            {{ form_row(form.plainPassword.second, {'label':' ','attr':{'class': 'form-control','type':'texte','placeholder':'Repeat new password'}}) }}
+                            {{ form_rest(form) }}
+                            <div>
+                                <input id="_submit" name="_submit" value="{{ 'resetting.reset.submit'|trans }}" type="submit" class="btn btn-lg btn-default btn-block" />
+                            <br>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+
+</div>

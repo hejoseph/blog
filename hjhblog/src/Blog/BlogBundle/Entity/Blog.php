@@ -33,7 +33,7 @@ class Blog
     /**
      * @var string
      *
-     * @ORM\Column(name="author", type="string", length=100)
+     * @ORM\Column(name="author", type="string", length=100, nullable=true)
      */
     private $author;
 
@@ -47,7 +47,7 @@ class Blog
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=20)
+     * @ORM\Column(name="image", type="string", length=20, nullable=true)
      */
     private $image;
 
@@ -58,8 +58,8 @@ class Blog
     private $picture;
 
     /**
-    * @ORM\ManytoOne(targetEntity="Category", cascade={"persist"})
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\ManytoOne(targetEntity="Category", inversedBy="blogs", cascade={"persist"})
+    * @ORM\JoinColumn(nullable=true)
     */
     private $category;
 
@@ -72,7 +72,7 @@ class Blog
     /**
      * @var string
      *
-     * @ORM\Column(name="tags", type="text")
+     * @ORM\Column(name="tags", type="text", nullable=true)
      */
     private $tags;
 
@@ -98,7 +98,7 @@ class Blog
 
     /**
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $popularity;
 

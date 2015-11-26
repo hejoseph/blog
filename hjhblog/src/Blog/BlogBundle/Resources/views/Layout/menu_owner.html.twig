@@ -1,0 +1,11 @@
+{% extends 'BlogBundle:layout:header_menu_display.html.twig' %}
+
+{% block owner_create %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if app.user.id == id %}
+            <li class="pull-right">
+              <a href="{{path('BlogBundle_blog_create')}}"><span class="glyphicon glyphicon-plus"></span></a>
+            </li>
+        {% endif %}
+    {% endif %}
+{% endblock %}

@@ -37,6 +37,13 @@ BlogBundle_blog_edit:
         _method:  GET|POST
         blog_id: \d+
 
+BlogBundle_blog_remove:
+    pattern: /blog/{blog_id}/remove
+    defaults: { _controller: BlogBundle:Blog:remove }
+    requirements:
+        _method:  GET|POST
+        blog_id: \d+
+
 BlogBundle_blog_create:
     pattern: /blog/create
     defaults: { _controller: BlogBundle:Blog:create }
@@ -62,6 +69,13 @@ BlogBundle_blogger_profile:
 BlogBundle_blogger_search:
     pattern:  /search
     defaults: { _controller: BlogBundle:Page:search }
+    requirements:
+        _method:  GET
+        id: \d+
+
+BlogBundle_blogger_category:
+    pattern:  /category/{category_id}
+    defaults: { _controller: BlogBundle:Category:blogsByCategory }
     requirements:
         _method:  GET
         id: \d+

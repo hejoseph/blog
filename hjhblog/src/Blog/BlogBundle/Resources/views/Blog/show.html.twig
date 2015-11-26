@@ -5,7 +5,18 @@
 {% block body %}
     <article class="blog">
         <header>
-            <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
+            <div class="date">
+                <time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if blog.blogger.id == app.user.id %}
+                        <div class="pull-right"><a href="{{ path('BlogBundle_blog_remove', {'blog_id':blog.id}) }}"><span class="glyphicon glyphicon-remove"> </span></a>
+                        </div>
+                        <div class="pull-right"><a href="{{ path('BlogBundle_blog_edit', {'blog_id':blog.id}) }}"><span class="glyphicon glyphicon-edit"> </span></a>
+                        </div>
+
+                    {% endif %}
+                {% endif %}
+            </div>
             <h2>{{ blog.title }}</h2>
         </header>
         <img src="{{ asset(['images/', blog.image]|join) }}" alt="{{ blog.title }} image not found" class="large" />

@@ -1,0 +1,30 @@
+<ul class="nav nav-tabs" id="myTab">
+  <li>
+    <a href="#sent" data-toggle="tab">
+      <span class="glyphicon glyphicon-th-list">
+      </span>
+    </a>
+  </li>
+  <li>
+    <a href="#event" data-toggle="tab">
+      <span class="glyphicon glyphicon-list">
+      </span>
+    </a>
+  </li>
+  <li><a href="#rectangle" data-toggle="tab"><span class="glyphicon glyphicon-th-large"></span></a></li>
+  <li class="active">
+    <a href="#inbox" data-toggle="tab">
+      <span class="glyphicon glyphicon-th">
+      </span>
+    </a>
+  </li>
+  {% block owner_create %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <li class="pull-right">
+          <a href="{{path('BlogBundle_blog_create')}}"><span class="glyphicon glyphicon-plus"></span></a>
+        </li>
+    {% endif %}
+  {% endblock %}
+  
+  
+</ul>

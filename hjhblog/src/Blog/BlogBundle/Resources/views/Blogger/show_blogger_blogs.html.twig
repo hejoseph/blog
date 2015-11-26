@@ -1,302 +1,144 @@
 {% extends "BlogBundle::layout.html.twig" %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="{{ asset('css/blog_user.css') }}" type="text/css" rel="stylesheet" />
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-
+{% block stylesheets %} {{ parent() }}
+  <link href="{{ asset('css/blog_user.css') }}" type="text/css" rel="stylesheet" />
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 {% endblock %}
 {% block body %}
-
-<div class="container">
+  <div class="container">
     <div class="row well">
-        <div class="col-md-2">
-          {% include 'BlogBundle:Blogger:menu_blogger.html.twig' with {'blogger_id': blogger.id} %}
+      <div class="col-md-2">
+        {% include 'BlogBundle:Blogger:menu_blogger.html.twig' with {'blogger_id': blogger.id} %}
+      </div>
+      <div class="col-md-10">
+        <div class="panel">
+          <img class="pic img-circle" src="http://placehold.it/120x120" alt="...">
+          <div class="name">
+            <small> {{blogger.firstname}} {{blogger.surname}}
+            </small>
+          </div>
+          <a href="#" class="btn btn-xs btn-primary pull-right" style="margin:10px;">
+            <span class="glyphicon glyphicon-picture">
+            </span> Change cover
+          </a>
         </div>
-        <div class="col-md-10">
-                <div class="panel">
-                    <img class="pic img-circle" src="http://placehold.it/120x120" alt="...">
-                    <div class="name"><small>{{blogger.firstname}} {{blogger.surname}}</small></div>
-                    <a href="#" class="btn btn-xs btn-primary pull-right" style="margin:10px;"><span class="glyphicon glyphicon-picture"></span> Change cover</a>
-                </div>
-                
-    <br><br><br>
-    {% block blogger_body %}
-    <ul class="nav nav-tabs" id="myTab">
-      <li><a href="#sent" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span></a></li>
-      <li><a href="#event" data-toggle="tab"><span class="glyphicon glyphicon-list"></span></a></li>
-      <li class="active"><a href="#inbox" data-toggle="tab"><span class="glyphicon glyphicon-th"></span></a></li>
-    </ul>
-    
-    <div class="tab-content">
-      <div class="tab-pane active" id="inbox">
-
-        <div class="row">
-          {% for blog in blogs %}
-                {% if loop.first %}
-                  <div class="row stylish-panel">
-                {% elseif loop.index0 is divisible by(3) %} 
+        <br>
+        <br>
+        <br>
+        {% block blogger_body %}
+          {% include 'BlogBundle:Layout:menu_owner.html.twig' with {'id' : blogger.id} %}
+          <div class="tab-content">
+            <div class="tab-pane active" id="inbox">
+              {% include 'BlogBundle:Layout:display_list_3.html.twig' with { 'blogs': blogs } %}
+              <a type="button" data-toggle="collapse" data-target="#a1">
+                <div class="btn-toolbar well well-sm" role="toolbar"  style="margin:0px;">
+                  <div class="btn-group">
+                    <input type="checkbox">
                   </div>
-                  <div class="row stylish-panel">
-                {% endif %}
-                <div class="col-md-4">
-                  <div>
-                    <img src="http://placehold.it/800X800" alt="Texto Alternativo" class="img-responsive img-circle img-thumbnail">
-                    <h4>
-                      <a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}">{{blog.title(40)}}...</a>
-                    </h4>
-                    <p>
-                      {{blog.content(100)}} ...
-                    </p>
-                    <a href="{{ path("BlogBundle_blog_show", {'id' : blog.id})}}" class="btn btn-primary" title="See more">Read »</a> 
-                    <span class="glyphicon glyphicon-fire"></span> {{blog.popularity}} 
-                    <span class="glyphicon glyphicon-comment"></span> {% render(controller("BlogBundle:Blog:show", {'id':blog.id, 'case':true}))%} 
-                    <p>by <a href="{{ path('BlogBundle_blogger_blogs', {'blogger_id' : blog.blogger.id})}} ">{{blog.blogger.firstname}} {{blog.blogger.surname}}</a></p>
+                  <div class="btn-group col-md-3"> Admin Kumar
                   </div>
-                </div>
-
-                {% if loop.last %}
+                  <div class="btn-group col-md-8">
+                    <b> Hi Check this new Bootstrap plugin
+                    </b>
+                    <div class="pull-right">
+                      <i class="glyphicon glyphicon-time">
+                      </i> 12:10 PM
+                      <button class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">
+                      <i class="fa fa-share-square-o"> Reply
+                      </i>
+                      </button>
                     </div>
-                {% endif %}
-
-          {% else %}
-              No blogs available
-          {% endfor %}
-      </div>
-
-
-
-        <a type="button" data-toggle="collapse" data-target="#a1">
-            <div class="btn-toolbar well well-sm" role="toolbar"  style="margin:0px;">
-              <div class="btn-group"><input type="checkbox"></div>
-              <div class="btn-group col-md-3">Admin Kumar</div>
-              <div class="btn-group col-md-8"><b>Hi Check this new Bootstrap plugin</b> <div class="pull-right"><i class="glyphicon glyphicon-time"></i> 12:10 PM <button class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-share-square-o"> Reply</i></button></div> </div>
+                  </div>
+                </div>
+              </a>
+              <div id="a1" class="collapse out well"> This is the message body1
+              </div>
+              <br>
+              <button class="btn btn-primary btn-xs">
+              <i class="fa fa-check-square-o">
+              </i> Delete Checked Item's
+              </button>
             </div>
-        </a>
-        <div id="a1" class="collapse out well">This is the message body1</div>
-        <br>
-        <button class="btn btn-primary btn-xs"><i class="fa fa-check-square-o"></i> Delete Checked Item's</button>
-      </div>
-     <br/><br/>
-       
-      <div class="tab-pane" id="sent">
-      <div class="row">
-        <div class="col-sm-4 "><a href="#" class=""><img src="http://placehold.it/2560X1280" class="img img-responsive thumbnail"></a>
-        </div>
-        <div class="col-sm-8">
-          <h3 class="title">How to Fight Fraud with Artificial Intelligence and Intelligent Analytics</h3>
-          <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
-          <p>Could artificial intelligence have been used to prevent the high-profile Target breach? The concept is not so far-fetched. Organizations such as Mastercard and RBS WorldPay have long relied on artificial intelligence to detect fraudulent transaction patterns and prevent card.</p>
-          
-          <p class="text-muted">Presented by <a href="#">Ellen Richey</a></p>
-          
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-        </div>
-        <div class="col-sm-8">
-          <h3 class="title">Big Payment Data: Leveraging Transactional Data to Ensure an Enterprise Approach to Risk Management</h3>
-          <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> July 23, 2014 @ 1:30 PM</p>
-          <p>60% of organizations were exposed to actual or attempted fraud loss last year. As fraud and risk increases year over year, the amount of data being collected increases as well.
-            </p><p class="text-muted">Presented by <a href="#">Mike Braatz</a>, <a href="#">Jonathan Eber</a></p>
-          
-        </div>
-      </div>
-      <hr><div class="row">
-      <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-      </div>
-      <div class="col-sm-8">
-        <h3 class="title">How to Fight Fraud with Artificial Intelligence and Intelligent Analytics</h3>
-        <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
-        <p>Could artificial intelligence have been used to prevent the high-profile Target breach? The concept is not so far-fetched. Organizations such as Mastercard and RBS WorldPay have long relied on artificial intelligence to detect fraudulent transaction patterns and prevent card.</p>
-        
-        <p class="text-muted">Presented by <a href="#">Ellen Richey</a></p>
-        
-      </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-        </div>
-        <div class="col-sm-8">
-          <h3 class="title">Big Payment Data: Leveraging Transactional Data to Ensure an Enterprise Approach to Risk Management</h3>
-          <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> July 23, 2014 @ 1:30 PM</p>
-          <p>60% of organizations were exposed to actual or attempted fraud loss last year. As fraud and risk increases year over year, the amount of data being collected increases as well.
-            </p><p class="text-muted">Presented by <a href="#">Mike Braatz</a>, <a href="#">Jonathan Eber</a></p>
-          
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-        </div>
-        <div class="col-sm-8">
-          <h3 class="title">How to Fight Fraud with Artificial Intelligence and Intelligent Analytics</h3>
-          <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
-          <p>Could artificial intelligence have been used to prevent the high-profile Target breach? The concept is not so far-fetched. Organizations such as Mastercard and RBS WorldPay have long relied on artificial intelligence to detect fraudulent transaction patterns and prevent card.</p>
-          
-          <p class="text-muted">Presented by <a href="#">Ellen Richey</a></p>
-          
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-        </div>
-        <div class="col-sm-8">
-          <h3 class="title">Big Payment Data: Leveraging Transactional Data to Ensure an Enterprise Approach to Risk Management</h3>
-          <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> July 23, 2014 @ 1:30 PM</p>
-          <p>60% of organizations were exposed to actual or attempted fraud loss last year. As fraud and risk increases year over year, the amount of data being collected increases as well.
-            </p><p class="text-muted">Presented by <a href="#">Mike Braatz</a>, <a href="#">Jonathan Eber</a></p>
-          
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-        </div>
-        <div class="col-sm-8">
-          <h3 class="title">How to Fight Fraud with Artificial Intelligence and Intelligent Analytics</h3>
-          <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
-          <p>Could artificial intelligence have been used to prevent the high-profile Target breach? The concept is not so far-fetched. Organizations such as Mastercard and RBS WorldPay have long relied on artificial intelligence to detect fraudulent transaction patterns and prevent card.</p>
-          
-          <p class="text-muted">Presented by <a href="#">Ellen Richey</a></p>
-          
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-        </div>
-        <div class="col-sm-8">
-          <h3 class="title">Big Payment Data: Leveraging Transactional Data to Ensure an Enterprise Approach to Risk Management</h3>
-          <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> July 23, 2014 @ 1:30 PM</p>
-          <p>60% of organizations were exposed to actual or attempted fraud loss last year. As fraud and risk increases year over year, the amount of data being collected increases as well.
-            </p><p class="text-muted">Presented by <a href="#">Mike Braatz</a>, <a href="#">Jonathan Eber</a></p>
-          
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-        </div>
-        <div class="col-sm-8">
-          <h3 class="title">How to Fight Fraud with Artificial Intelligence and Intelligent Analytics</h3>
-          <p class="text-muted"><span class="glyphicon glyphicon-lock"></span> Available Exclusively for Premium Members</p>
-          <p>Could artificial intelligence have been used to prevent the high-profile Target breach? The concept is not so far-fetched. Organizations such as Mastercard and RBS WorldPay have long relied on artificial intelligence to detect fraudulent transaction patterns and prevent card.</p>
-          
-          <p class="text-muted">Presented by <a href="#">Ellen Richey</a></p>
-          
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
-        </div>
-        <div class="col-sm-8">
-          <h3 class="title">Big Payment Data: Leveraging Transactional Data to Ensure an Enterprise Approach to Risk Management</h3>
-          <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> July 23, 2014 @ 1:30 PM</p>
-          <p>60% of organizations were exposed to actual or attempted fraud loss last year. As fraud and risk increases year over year, the amount of data being collected increases as well.
-            </p><p class="text-muted">Presented by <a href="#">Mike Braatz</a>, <a href="#">Jonathan Eber</a></p>
-          
-        </div>
-      </div>
-
-
-        
-
-      <hr>
-
-            <a type="button" data-toggle="collapse" data-target="#s1">
-            <div class="btn-toolbar well well-sm" role="toolbar"  style="margin:0px;">
-              <div class="btn-group"><input type="checkbox"></div>
-              <div class="btn-group col-md-3">Kumar</div>
-              <div class="btn-group col-md-8"><b>This is reply from Bootstrap plugin</b> <div class="pull-right"><i class="glyphicon glyphicon-time"></i> 12:30 AM</div> </div>
+            <br/>
+            <br/>
+            <div class="tab-pane" id="sent">
+              {% include 'BlogBundle:Layout:display_list_1_big.html.twig' with { 'blogs': blogs } %}
+              <a type="button" data-toggle="collapse" data-target="#s1">
+                <div class="btn-toolbar well well-sm" role="toolbar"  style="margin:0px;">
+                  <div class="btn-group">
+                    <input type="checkbox">
+                  </div>
+                  <div class="btn-group col-md-3">Kumar
+                  </div>
+                  <div class="btn-group col-md-8">
+                    <b>This is reply from Bootstrap plugin
+                    </b>
+                    <div class="pull-right">
+                      <i class="glyphicon glyphicon-time">
+                      </i> 12:30 AM
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <div id="s1" class="collapse out well">This is the message body1
+              </div>
+              <br>
+              <button class="btn btn-primary btn-xs">
+              <i class="fa fa-check-square-o">
+              </i> Delete Checked Item's
+              </button>
             </div>
-        </a>
-        <div id="s1" class="collapse out well">This is the message body1</div>
-        <br>
-        <button class="btn btn-primary btn-xs"><i class="fa fa-check-square-o"></i> Delete Checked Item's</button>
-      </div>
-      
-     <div class="tab-pane" id="event">
-
-        {% for blog in blogs %}
-
-       <div class="media">
-            <a class="pull-left" href="#">
-              <img class="media-object img-thumbnail" width="100" src="http://placehold.it/120x120" alt="...">
-            </a>
-            <div class="media-body">
-              <h4 class="media-heading">{{blog.title(40)}}</h4>
-              {{blog.content(100)}}...
+            <div class="tab-pane" id="event">
+              {% include 'BlogBundle:Layout:display_list_1_small.html.twig' with { 'blogs': blogs } %}
             </div>
+
+            <div class="tab-pane" id="rectangle">
+              {% include 'BlogBundle:Layout:display_list_2.html.twig' with { 'blogs': blogs } %}
+            </div>
+          </div>
+        </div>
       </div>
-
-        {% else %}
-          No blogs
-
-        {% endfor %}
     </div>
-    
-    
-        
-    </div>
-
-
-
-
-     </div>
-    </div>
-    
-    
-</div>
-
-
-
-
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content"><br/><br/>
-            <form class="form-horizontal">
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <br/>
+          <br/>
+          <form class="form-horizontal">
             <fieldset>
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-2 control-label" for="body">Body :</label>  
-              <div class="col-md-8">
-              <input id="body" name="body" type="text" placeholder="Message Body" class="form-control input-md">
-                
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-2 control-label" for="body">Body :
+                </label>
+                <div class="col-md-8">
+                  <input id="body" name="body" type="text" placeholder="Message Body" class="form-control input-md">
+                </div>
               </div>
-            </div>
-            
-            <!-- Textarea -->
-            <div class="form-group">
-              <label class="col-md-2 control-label" for="message">Message :</label>
-              <div class="col-md-8">                     
-                <textarea class="form-control" id="message" name="message"></textarea>
+              <!-- Textarea -->
+              <div class="form-group">
+                <label class="col-md-2 control-label" for="message">Message :
+                </label>
+                <div class="col-md-8">
+                  <textarea class="form-control" id="message" name="message">
+                  </textarea>
+                </div>
               </div>
-            </div>
-            
-            <!-- Button -->
-            <div class="form-group">
-              <label class="col-md-2 control-label" for="send"></label>
-              <div class="col-md-8">
-                <button id="send" name="send" class="btn btn-primary">Send</button>
+              <!-- Button -->
+              <div class="form-group">
+                <label class="col-md-2 control-label" for="send">
+                </label>
+                <div class="col-md-8">
+                  <button id="send" name="send" class="btn btn-primary">Send
+                  </button>
+                </div>
               </div>
-            </div>
-            
             </fieldset>
-            </form>
-
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-{% endblock %}
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="{{ asset("js/blog_user.js")}}"></script>
-
+  {% endblock %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script>
+  <script src="{{ asset("js/blog_user.js")}}">
+  </script>
 {% endblock %}

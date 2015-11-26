@@ -13,10 +13,15 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
     {
         $category1 = new Category();
         $category1->setName("Science");
+        $category1->addBlog($manager->merge($this->getReference('blog-1')));
+        $category1->addBlog($manager->merge($this->getReference('blog-2')));
+        $category1->addBlog($manager->merge($this->getReference('blog-3')));
         $manager->persist($category1);
 
         $category2 = new Category();
         $category2->setName("Business");
+        $category2->addBlog($manager->merge($this->getReference('blog-4')));
+        $category2->addBlog($manager->merge($this->getReference('blog-5')));
         $manager->persist($category2);
 
         $category3 = new Category();
@@ -32,7 +37,7 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
 
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
 
 }

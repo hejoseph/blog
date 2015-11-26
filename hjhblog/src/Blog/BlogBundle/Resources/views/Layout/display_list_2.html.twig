@@ -1,0 +1,23 @@
+<div class="row">
+  {% for blog in blogs %}
+    <div class="col-sm-6">
+      <div id="myCarousel-{{blog.id}}" class="carousel slide article_home" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <img src="http://placehold.it/800x400?text=IMAGE" alt="Image" height="400" width="800"/>
+            <div class="carousel-caption">
+              <h3><a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}">{{blog.title(40)}}...</a></h3>
+              <p><span class="glyphicon glyphicon-user"/> <a href="{{ path('BlogBundle_blogger_blogs', {'blogger_id' : blog.blogger.id})}} ">{{blog.blogger.firstname}} {{blog.blogger.surname}}</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p><span class="glyphicon glyphicon-fire">   </span> {{blog.popularity}} <span class="glyphicon glyphicon-comment">   </span> {% render(controller("BlogBundle:Blog:show", {'id':blog.id, 'case':true}))%} 
+        <span class="glyphicon glyphicon-time pull-right"> {{blog.created|date('Y-m-d H:i:s')}}</span></p>
+    </div>
+    
+  {% else %}
+    <p>No Posts for the moment,</p>
+  {% endfor %}
+</div>

@@ -21,62 +21,60 @@ class Blogger extends BaseUser
 
     /**
     * @ORM\OnetoMany(targetEntity="Blog\BlogBundle\Entity\Blog", mappedBy="blogger",cascade={"persist"})
-    * @ORM\Column(name="blogs", type="text")
     */
     private $blog = array();
 
     /**
     * @ORM\OnetoMany(targetEntity="Blog\BlogBundle\Entity\Comment", mappedBy="blogger",cascade={"persist"})
-    * @ORM\Column(name="comments", type="text")
     */
     private $comments = array();
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surname", type="string", length=20)
+     * @ORM\Column(name="surname", type="string", length=20, nullable=true)
      */
     private $surname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=20)
+     * @ORM\Column(name="firstname", type="string", length=20, nullable=true)
      */
     private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=20)
+     * @ORM\Column(name="country", type="string", length=20, nullable=true)
      */
     private $country;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="dateOfBirth", type="string", length=10)
+     * @ORM\Column(name="dateOfBirth", type="string", length=10, nullable=true)
      */
     private $dateOfBirth;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="gender", type="string", length=6)
+     * @ORM\Column(name="gender", type="string", length=6, nullable=true)
      */
     private $gender;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=100)
+     * @ORM\Column(name="address", type="string", length=100, nullable=true)
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="zipcode", type="string", length=10)
+     * @ORM\Column(name="zipcode", type="string", length=10, nullable=true)
      */
     private $zipcode;
 

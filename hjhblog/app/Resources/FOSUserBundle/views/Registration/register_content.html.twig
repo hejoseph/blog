@@ -1,8 +1,30 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
+<div class="tab-pane" id="register">
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'form-signin'}}) }}
+    {# {{ form_widget(form) }} #}
+    {{ form_row(form.username, {'label':' ','attr':{'class': 'form-control','type':'texte','placeholder':'User Name'}}) }}
+    {{ form_row(form.email, {'label':' ','attr':{'class': 'form-control','type':'email','placeholder':'Email Adress ...'}}) }}
+    {{ form_row(form.plainPassword.first, {'label':' ','attr':{'class': 'form-control','type':'email','placeholder':'Password'}}) }}
+    {{ form_row(form.plainPassword.second, {'label':' ','attr':{'class': 'form-control','type':'email','placeholder':'Repeat Password'}}) }}
+    <br/>
     <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+        <input type="submit" class="btn btn-lg btn-default btn-block" value="{{ 'registration.submit'|trans }}" />
     </div>
 {{ form_end(form) }}
+
+<div id="tabs" data-tabs="tabs">
+<p class="text-center"><a href="#login" data-toggle="tab">Have an Account?</a></p>
+</div>
+</div>
+
+
+
+    {# <form class="" action="" method="">
+        <input type="text" class="form-control" placeholder="User Name ..." required autofocus>
+        <input type="email" class="form-control" placeholder="Emaill Address ..." required>
+        <input type="password" class="form-control" placeholder="Password ..." required>
+        
+    </form> #}
+    

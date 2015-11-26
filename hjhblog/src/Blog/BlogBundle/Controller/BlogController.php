@@ -38,10 +38,19 @@ class BlogController extends Controller
     }
 
     public function editAction($blog_id){
+
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
         $em = $this->getDoctrine()->getEntityManager();
         $blog = $em->getRepository('BlogBundle:Blog')->find($blog_id);
         if (!$blog) {
             throw $this->createNotFoundException('Unable to find Blog post.');
+        }
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if($blog->getBlogger()->getId()!=$user->getId()){
+            throw $this->createAccessDeniedException();
         }
 
         $form = $this->createForm(new BlogType(), $blog);
@@ -51,8 +60,6 @@ class BlogController extends Controller
             $form->bind($request);
 
             if ($form->isValid()) {
-                $em = $this->getDoctrine()
-                       ->getEntityManager();
                 $blog->setUpdated(new \DateTime());
                 $em->persist($blog);
                 $em->flush();
@@ -72,8 +79,16 @@ class BlogController extends Controller
 
 
     public function createAction(){
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        // the above is a shortcut for this
+        
         $em = $this->getDoctrine()->getEntityManager();
         $blog = new Blog();
+
+        
 
         $form = $this->createForm(new BlogType(), $blog);
 
@@ -84,6 +99,8 @@ class BlogController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()
                        ->getEntityManager();
+                $user = $this->get('security.token_storage')->getToken()->getUser();
+                $blog->setBlogger($user);
                 $em->persist($blog);
                 $em->flush();
 
@@ -97,4 +114,24 @@ class BlogController extends Controller
 
     
     }
+
+
+    public function removeAction($blog_id){
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+        $blog = $em->getRepository('BlogBundle:Blog')->find($blog_id);
+        if (!$blog) {
+            throw $this->createNotFoundException('Unable to find Blog post.');
+        }
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if($blog->getBlogger()->getId()!=$user->getId()){
+            throw $this->createAccessDeniedException();
+        }
+        $em->remove($blog);
+        $em->flush();
+        return $this->redirect($this->generateUrl('BlogBundle_homepage'));
+    }
+
 }

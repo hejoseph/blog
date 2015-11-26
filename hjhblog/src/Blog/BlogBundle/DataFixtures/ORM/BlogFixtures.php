@@ -21,7 +21,7 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blog1->setUpdated($blog1->getCreated());
         $blog1->setPopularity(1);
         $blog1->setBlogger($manager->merge($this->getReference('blogger-2')));
-        $blog1->setCategory($manager->merge($this->getReference('category-1')));
+        // $blog1->setCategory($manager->merge($this->getReference('category-1')));
         $manager->persist($blog1);
 
         $blog2 = new Blog();
@@ -34,7 +34,7 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blog2->setUpdated($blog2->getCreated());
         $blog2->setPopularity(1);
         $blog2->setBlogger($manager->merge($this->getReference('blogger-2')));
-        $blog2->setCategory($manager->merge($this->getReference('category-2')));
+        // $blog2->setCategory($manager->merge($this->getReference('category-2')));
         $manager->persist($blog2);
 
         $blog3 = new Blog();
@@ -47,7 +47,7 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blog3->setUpdated($blog3->getCreated());
         $blog3->setPopularity(2);
         $blog3->setBlogger($manager->merge($this->getReference('blogger-2')));
-        $blog3->setCategory($manager->merge($this->getReference('category-3')));
+        // $blog3->setCategory($manager->merge($this->getReference('category-3')));
         $manager->persist($blog3);
 
         $blog4 = new Blog();
@@ -60,7 +60,7 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blog4->setUpdated($blog4->getCreated());
         $blog4->setPopularity(2);
         $blog4->setBlogger($manager->merge($this->getReference('blogger-3')));
-        $blog4->setCategory($manager->merge($this->getReference('category-1')));
+        // $blog4->setCategory($manager->merge($this->getReference('category-1')));
         $manager->persist($blog4);
 
         $blog5 = new Blog();
@@ -73,7 +73,7 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blog5->setUpdated($blog5->getCreated());
         $blog5->setPopularity(5);
         $blog5->setBlogger($manager->merge($this->getReference('blogger-4')));
-        $blog5->setCategory($manager->merge($this->getReference('category-2')));
+        // $blog5->setCategory($manager->merge($this->getReference('category-2')));
         $manager->persist($blog5);
 
         $manager->flush();
@@ -89,7 +89,7 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder()
     {
-        return 3;
+        return 2;
     }
 
 }

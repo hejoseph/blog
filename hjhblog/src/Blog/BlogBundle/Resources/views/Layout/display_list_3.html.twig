@@ -1,0 +1,40 @@
+<div class="row">
+  {% for blog in blogs %}
+    {% if loop.first %}
+      <div class="row stylish-panel">
+      {% elseif loop.index0 is divisible by(3) %}
+      </div>
+      <div class="row stylish-panel">
+      {% endif %}
+      <div class="col-md-4">
+        <div>
+          <img src="http://placehold.it/800X800" alt="Texto Alternativo" class="img-responsive img-circle img-thumbnail">
+          <h4>
+          <a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}"> {{blog.title(40)}}...
+          </a>
+          </h4>
+          <p> {{blog.content(100)}} ...
+          </p>
+          <a href="{{ path("BlogBundle_blog_show", {'id' : blog.id})}}" class="btn btn-primary" title="See more"> Read »
+          </a>
+          <span class="glyphicon glyphicon-fire">
+          </span> {{blog.popularity}}
+          <span class="glyphicon glyphicon-comment">
+          </span>
+          {% render(controller("BlogBundle:Blog:show", {'id':blog.id, 'case':true}))%}
+          <p> 
+            <a href="{{ path('BlogBundle_blogger_blogs', {'blogger_id' : blog.blogger.id})}} "> <span class="glyphicon glyphicon-user"/> {{blog.blogger.firstname}} {{blog.blogger.surname}}
+            </a>
+          </p>
+          <p>
+            <span class="glyphicon glyphicon-time"/> {{blog.created|date('Y-m-d H:i:s')}}
+          </p>
+        </div>
+      </div>
+      {% if loop.last %}
+      </div>
+    {% endif %}
+  {% else %}
+    No blogs available
+  {% endfor %}
+</div>

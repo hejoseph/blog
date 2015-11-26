@@ -43,29 +43,57 @@
 {# navbar-fixed-top #}
                 <div class="navbar navbar-inverse ">
                   <div class="container">
-                    <div class="navbar-header">
-                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                      </button>
-                      <a class="navbar-brand" href="{{ path('BlogBundle_homepage') }}">何家豪Blog</a>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        {% block navigation %}
-                        <nav>
-                          <ul class="nav navbar-nav">
-                            <li class="active"><a href="{{ path('BlogBundle_homepage') }}">Home</a></li>
-                            <li><a href="{{ path('BlogBundle_about') }}">About</a></li>
-                            <li><a href="{{ path('BlogBundle_contact') }}">Contact</a></li>
-                          </ul>
+                    <div class="row">
+                        <div class="navbar-header col-sm-4">
+                          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                          </button>
+                          <a class="navbar-brand" href="{{ path('BlogBundle_homepage') }}">何家豪Blog</a> 
+                        </div>
 
-                          <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{ path('fos_user_security_login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                          </ul>
-                        </nav>
-                        {% endblock %}
-                    </div><!--/.nav-collapse -->
+    
+                        <div class="collapse navbar-collapse">
+                            {% block navigation %}
+                            <nav>
+                              <ul class="nav navbar-nav">
+                                <li class="active"><a href="{{ path('BlogBundle_homepage') }}">Home</a></li>
+                                <li><a href="{{ path('BlogBundle_about') }}">About</a></li>
+                                <li><a href="{{ path('BlogBundle_contact') }}">Contact</a></li>
+
+                              </ul>
+
+                              <ul class="nav navbar-nav navbar-right">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <li><a href="{{ path('BlogBundle_blogger_profile',{'blogger_id': app.user.id})}}"><span class="glyphicon glyphicon-user"></span>{{app.user.firstname}} {{app.user.surname}}</a></li>
+                                    <li><a href="{{ path('fos_user_security_logout')}}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                                {% else %}
+                                    <li><a href="{{ path('fos_user_security_login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+                                {% endif %}
+                                
+                                
+                                {% block search %}
+                                <li><a href="#search"><span class="glyphicon glyphicon-search"></span></a></li>
+                                {% endblock %}
+                              </ul>
+
+                            </nav>
+                            {% endblock %}
+                        </div><!--/.nav-collapse -->
+                        
+                    </div>
+                    <div class="row">
+                        
+
+                    </div>
+                    {# {% block category_title %}
+                        <div class="row text-center">
+                            <h2 class="text-muted">Category</h2>
+                            <br>
+                        </div>
+                    {% endblock %} #}
                   </div>
                 </div>
 
@@ -158,16 +186,23 @@
 
                         <div class="footer-right">
 
-                <form method="get" action="#">
-                    <i class="fa fa-search"></i>
+                {# <form method="post" action="{{ path("BlogBundle_blogger_search") }}">
                     <input placeholder="Search our website" name="search" />
-                    
-                </form>
-
+                    <input type="submit">
+                </form> #}
             </div>
 
                     </footer>
 
+    
+
+
+    <div id="search">
+        <form action="{{ path("BlogBundle_blogger_search") }}" method="get" >
+            <input type="search" placeholder="Search our website" name="search" />
+            <button type="submit" class="btn btn-primary">Search <span class="glyphicon glyphicon-search"></span></button>
+        </form>
+    </div>
 
     </div>
     {% block javascripts %}

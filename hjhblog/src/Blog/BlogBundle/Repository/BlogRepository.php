@@ -42,4 +42,42 @@ class BlogRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
+    public function getBlogsFromString($string){
+        $string = trim($string);
+        
+        // foreach ($list_string as $key => $value) {
+        //     $list_string[$key] = "%".$list_string[$key]."%";
+        // }
+        // $qb->andWhere("b.author in (:list_string)")
+        // ->setParameter("list_string", $list_string);
+        // ->select('b')
+        // ->innerJoin('b.blogger', 'p', 'WITH', 'p.id = b.blogger')
+        // ->where('p.surname like :chaine OR b.title like :chaine')
+        // ->setParameter("chaine", "%".$string."%");
+        $sql = "SELECT b, p FROM BlogBundle:Blog b
+              JOIN b.blogger p
+              WHERE p.id = b.blogger";
+        if($string==""){
+          $query = $this->getEntityManager()
+        ->createQuery($sql);
+          return $query->getResult();
+        }
+        $list_string = explode(" ", $string);
+        $sql = $sql." AND ";
+        foreach($list_string as $key => $value){
+          $sql = $sql . "b.title like '%".$value."%'";
+          $sql = $sql . " OR b.content like '%".$value."%'";
+          $sql = $sql . " OR p.firstname like '%".$value."%'";
+          $sql = $sql . " OR p.surname like '%".$value."%'";
+          if($key < count($list_string)-1){
+              $sql = $sql." OR ";
+          }
+        }
+
+
+      $query = $this->getEntityManager()
+        ->createQuery($sql);
+        return $query->getResult();
+    }
+
 }

@@ -2,7 +2,7 @@
 
 namespace Blog\BlogBundle\Entity;
 
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * Category
@@ -28,6 +28,10 @@ class Category
      */
     private $name;
 
+    /**
+    * @ORM\OnetoMany(targetEntity="Blog", mappedBy="category", cascade={"persist"})
+    */
+    private $blogs;
 
     /**
      * Get id
@@ -37,6 +41,11 @@ class Category
     public function getId()
     {
         return $this->id;
+    }
+
+    public function __construct()
+    {
+        $this->blogs = new ArrayCollection();
     }
 
     /**
@@ -61,6 +70,46 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Gets the value of blogs.
+     *
+     * @return mixed
+     */
+    public function getBlogs()
+    {
+        return $this->blogs;
+    }
+
+    /**
+     * Sets the value of blogs.
+     *
+     * @param mixed $blogs the blogs
+     *
+     * @return self
+     */
+    private function setBlogs($blogs)
+    {
+        $this->blogs = $blogs;
+
+        return $this;
+    }
+
+    /**
+     * Add blog
+     *
+     * @param \Blog\BlogBundle\Entity\Blog $blog
+     *
+     * @return Blogger
+     */
+    public function addBlog(\Blog\BlogBundle\Entity\Blog $blog)
+    {
+        $this->blog[] = $blog;
+
+        $blog->setCategory($this);
+
+        return $this;
     }
 }
 

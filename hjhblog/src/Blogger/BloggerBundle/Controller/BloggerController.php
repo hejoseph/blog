@@ -14,6 +14,16 @@ class BloggerController extends Controller
         
     }
 
+    pubic function linkToProfileAction(){
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
 
+        // the above is a shortcut for this
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        var_dump($user);
+
+        return null;
+    }
     
 }
