@@ -58,13 +58,13 @@ class Blog
     private $picture;
 
     /**
-    * @ORM\ManytoOne(targetEntity="Category", inversedBy="blogs", cascade={"persist"})
+    * @ORM\ManyToOne(targetEntity="Category", inversedBy="blogs", cascade={"persist"})
     * @ORM\JoinColumn(nullable=true)
     */
     private $category;
 
     /**
-    * @ORM\ManytoOne(targetEntity="Blogger\BloggerBundle\Entity\Blogger", inversedBy="blog")
+    * @ORM\ManyToOne(targetEntity="Blogger\BloggerBundle\Entity\Blogger", inversedBy="blog")
     * @ORM\JoinColumn(nullable=false, name="blogger_id", referencedColumnName="id")
     */
     private $blogger;
