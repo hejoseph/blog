@@ -20,7 +20,7 @@ class Blogger extends BaseUser
     protected $id;
 
     /**
-    * @ORM\OnetoMany(targetEntity="Blog\BlogBundle\Entity\Blog", mappedBy="blogger",cascade={"persist"})
+    * @ORM\OneToMany(targetEntity="Blog\BlogBundle\Entity\Blog", mappedBy="blogger",cascade={"persist"})
     */
     private $blog = array();
 
