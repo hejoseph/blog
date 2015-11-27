@@ -29,7 +29,7 @@ class Category
     private $name;
 
     /**
-    * @ORM\OnetoMany(targetEntity="Blog", mappedBy="category", cascade={"persist"})
+    * @ORM\OneToMany(targetEntity="Blog", mappedBy="category", cascade={"persist"})
     */
     private $blogs;
 
