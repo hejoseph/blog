@@ -21,7 +21,8 @@
           </span> {{blog.popularity}}
           <span class="glyphicon glyphicon-comment">
           </span>
-          {% render(controller("BlogBundle:Blog:show", {'id':blog.id, 'case':true}))%}
+          {{ blog.comments|length }}
+          {# {% render(controller("BlogBundle:Blog:show", {'id':blog.id, 'case':true}))%} #}
           <p> 
             <a href="{{ path('BlogBundle_blogger_blogs', {'blogger_id' : blog.blogger.id})}} "> <span class="glyphicon glyphicon-user"/> {{blog.blogger.firstname}} {{blog.blogger.surname}}
             </a>

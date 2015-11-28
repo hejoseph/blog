@@ -1,0 +1,49 @@
+{% extends 'BlogBundle:Blogger:dashboard.html.twig'%}
+
+{% block blogger_body %}
+    <div class="bs-example">
+    <form action="{{path('BlogBundle_blog_user_dashOperations')}}" method="get">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    <h3 class="panel-title text-center">DASHBOARD BLOG<a href="{{path('BlogBundle_blog_create')}}"><span class="glyphicon glyphicon-plus pull-right">&nbsp;</span></a></h3>
+                    
+                </div>
+            </div>
+            <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table" id="table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="main_checkbox" ></th>
+                            <th>Picture</th>
+                            <th>Blog Title</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for blog in blogs %}
+                            <tr>   
+                                <td><input type="checkbox" class="user_blogs" name="blog_id[]" value="{{blog.id}}"></td>
+                                <td>{{blog.picture}}</td>
+                                <td>{{blog.title}}</td>
+                            </tr>
+                        {% else %}
+                            <p>No Blogs ...</p>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+        </div>
+
+            </div> 
+            <div class="panel-footer clearfix">
+                <div class="pull-right">
+                    <input type="submit" id="edit_dash" name="action" class="btn btn-primary hide" value="Edit"></input>
+                    <input type="submit" id="remove_dash" name="action" class="btn btn-danger hide" value="Remove"></input>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

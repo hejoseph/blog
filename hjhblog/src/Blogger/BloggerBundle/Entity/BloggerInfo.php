@@ -20,7 +20,7 @@ class BloggerInfo
     protected $id;
 
     /**
-    * @ORM\ManytoOne(targetEntity="Blogger\BloggerBundle\Entity\Blogger", inversedBy="info",cascade={"persist"})
+    * @ORM\ManyToOne(targetEntity="Blogger\BloggerBundle\Entity\Blogger", inversedBy="info",cascade={"persist"})
     * @ORM\JoinColumn(nullable=true, name="blogger_id",  referencedColumnName="id")
     */
     private $blogger;

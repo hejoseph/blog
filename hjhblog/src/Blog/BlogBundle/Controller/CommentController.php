@@ -34,12 +34,14 @@ class CommentController extends Controller
         $comment->setBlog($blog);
         $request = $this->getRequest();
         $form    = $this->createForm(new CommentType(), $comment);
-
         $form->bind($request);
 
         if ($form->isValid()) {
            $em = $this->getDoctrine()
                        ->getEntityManager();
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+            $user->addComments($comment);
+            $blog->addComment($comment);
             $em->persist($comment);
             $em->flush();
 

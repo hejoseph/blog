@@ -1,0 +1,14 @@
+<div class="collapse" id="category-list">
+    <div class="row">
+        <ul class="list-inline nav navbar-nav">
+
+        {% for category in categories %}
+
+            <li>
+                <a  href="{{path('BlogBundle_blogger_category', {'category_id':category.id})}}" class="list-group-item category-blog"><span class="badge">{{ category.blogs|length}}</span>{{ category.name }}</a>
+            </li>
+        {% endfor %}
+
+        </ul>       
+    </div>
+</div>

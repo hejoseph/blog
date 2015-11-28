@@ -10,8 +10,13 @@ use Blog\BlogBundle\Form\EnquiryType;
 use Blog\BlogBundle\Entity\Search;
 use Blog\BlogBundle\Form\SearchType;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 class PageController extends Controller
 {
+    /**
+     * @Route("/", name="homepage")
+     */
     public function indexAction()
     {
         $em = $this->getDoctrine()
@@ -20,6 +25,7 @@ class PageController extends Controller
         $blogs = $em->getRepository('BlogBundle:Blog')
                     ->getLatestBlogs();
 
+        // var_dump($blogs[0]->getComments()[0]);die;
         return $this->render('BlogBundle:Page:index.html.twig', array(
             'blogs' => $blogs
         ));
@@ -27,29 +33,6 @@ class PageController extends Controller
 
     public function aboutAction(){
     	return $this->render("BlogBundle:Page:about.html.twig");
-    }
-
-
-    public function contactAction(){
-    	$enquiry = new Enquiry();
-	    $form = $this->createForm(new EnquiryType(), $enquiry);
-
-	    $request = $this->getRequest();
-	    if ($request->getMethod() == 'POST') {
-	        $form->bind($request);
-
-	        if ($form->isValid()) {
-	            // Perform some action, such as sending an email
-
-	            // Redirect - This is important to prevent users re-posting
-	            // the form if they refresh the page
-	            return $this->redirect($this->generateUrl('BloggerBlogBundle_contact'));
-	        }
-	    }
-
-	    return $this->render('BlogBundle:Page:contact.html.twig', array(
-	        'form' => $form->createView()
-    ));
     }
 
 
@@ -107,6 +90,22 @@ class PageController extends Controller
         }
         return $this->render('BlogBundle:Blogger:profile.html.twig', array(
             'blogger'    => $blogger
+        ));
+    }
+
+    public function bloggerDashboardAction($blogger_id){
+        $em = $this->getDoctrine()
+                   ->getEntityManager();
+        $blogger = $em->getRepository('BloggerBundle:Blogger')->find($blogger_id);
+        if (!$blogger) {
+            throw $this->createNotFoundException('Unable to find the Blogger, he doesn\'t exist.');
+        }
+
+        $blogs = $em->getRepository('BlogBundle:Blog')
+                   ->getLatestBlogsFromBlogger($blogger->getId());
+
+        return $this->render('BlogBundle:Blogger:profile.html.twig', array(
+            'blogs'    => $blogs
         ));
     }
 

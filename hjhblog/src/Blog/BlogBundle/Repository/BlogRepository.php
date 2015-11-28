@@ -26,7 +26,8 @@ class BlogRepository extends \Doctrine\ORM\EntityRepository
     public function getBlogsMorePopularity(){
         $qb = $this->createQueryBuilder('b')
                    ->select('b')
-                   ->addOrderBy('b.popularity', 'DESC');
+                   ->addOrderBy('b.popularity', 'DESC')
+                   ->setMaxResults(4);
         return $qb->getQuery()
                   ->getResult();
     }
@@ -79,5 +80,6 @@ class BlogRepository extends \Doctrine\ORM\EntityRepository
         ->createQuery($sql);
         return $query->getResult();
     }
+
 
 }

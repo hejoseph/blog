@@ -21,4 +21,13 @@ $(function () {
         $(".category-blog").removeClass('active');
         $(this).addClass("active");
     });
+
+    var str = location.href;
+    var res = str.split("/");
+    if(res[res.length-2]=="category"){
+        var id = res[res.length-1];
+        $("#"+id).addClass("active");
+    }
+    
+
 });

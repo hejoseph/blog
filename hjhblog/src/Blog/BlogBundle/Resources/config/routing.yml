@@ -1,81 +1,114 @@
 BlogBundle_homepage:
-    pattern:  /
+    path:  /
     defaults: { _controller: BlogBundle:Page:index }
     requirements:
-        _method:  GET
+        methods:  GET
 
 BlogBundle_about:
     pattern:  /about
     defaults: { _controller: BlogBundle:Page:about }
     requirements:
-        _method:  GET
+        methods:  GET
 
 BlogBundle_contact:
     pattern:  /contact
     defaults: { _controller: BlogBundle:Page:contact }
     requirements:
-        _method:  POST|GET
+        methods:  POST|GET
 
 BlogBundle_blog_show:
     pattern:  /blog/{id}
     defaults: { _controller: BlogBundle:Blog:show }
     requirements:
-        _method:  GET
+        methods:  GET
         id: \d+
 
 BlogBundle_comment_create:
     pattern:  /comment/{blog_id}
     defaults: { _controller: BlogBundle:Comment:create }
     requirements:
-        _method:  POST
+        methods:  POST
         blog_id: \d+
+
+BlogBundle_blog_user_dashOperations:
+    pattern: /user_op
+    defaults: { _controller: BlogBundle:Blog:user_dashOperations }
+    requirements:
+        methods:  GET|POST
+        # blog_id: \d+
 
 BlogBundle_blog_edit:
     pattern: /blog/{blog_id}/edit
     defaults: { _controller: BlogBundle:Blog:edit }
     requirements:
-        _method:  GET|POST
+        methods:  GET|POST
         blog_id: \d+
 
 BlogBundle_blog_remove:
     pattern: /blog/{blog_id}/remove
     defaults: { _controller: BlogBundle:Blog:remove }
     requirements:
-        _method:  GET|POST
+        methods:  GET|POST
         blog_id: \d+
 
 BlogBundle_blog_create:
     pattern: /blog/create
     defaults: { _controller: BlogBundle:Blog:create }
     requirements:
-        _method:  GET|POST
+        methods:  GET|POST
         blog_id: \d+
 
 BlogBundle_blogger_blogs:
     pattern:  /blogger/{blogger_id}/blogs
     defaults: { _controller: BlogBundle:Page:bloggerBlogs }
     requirements:
-        _method:  GET
+        methods:  GET
         id: \d+
 
 BlogBundle_blogger_profile:
     pattern:  /blogger/{blogger_id}/profile
     defaults: { _controller: BlogBundle:Page:profile }
     requirements:
-        _method:  GET
+        methods:  GET
         id: \d+
 
+BlogBundle_blogger_dashboard:
+    pattern:  /blogger/{blogger_id}/dashboard
+    defaults: { _controller: BlogBundle:Page:bloggerDashboard }
+    requirements:
+        methods:  GET
+        id: \d+
 
 BlogBundle_blogger_search:
     pattern:  /search
     defaults: { _controller: BlogBundle:Page:search }
     requirements:
-        _method:  GET
+        methods:  GET
         id: \d+
 
 BlogBundle_blogger_category:
     pattern:  /category/{category_id}
     defaults: { _controller: BlogBundle:Category:blogsByCategory }
     requirements:
-        _method:  GET
+        methods:  GET
         id: \d+
+
+BlogBundle_blogger_category:
+    pattern:  /category/{category_id}
+    defaults: { _controller: BlogBundle:Category:blogsByCategory }
+    requirements:
+        methods:  GET
+        id: \d+
+
+
+Blog_Bundle_user_dashboard:
+    pattern:  /dashboard_user
+    defaults: { _controller: BlogBundle:Blogger:user }
+    requirements:
+        methods:  GET
+
+Blog_Bundle_admin_dashboard:
+    pattern:  /dashboard_admin
+    defaults: { _controller: BlogBundle:Blogger:admin }
+    requirements:
+        methods:  GET

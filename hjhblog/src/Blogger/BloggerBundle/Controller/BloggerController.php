@@ -25,5 +25,5 @@ class BloggerController extends Controller
 
         return null;
     }
-    
+
 }

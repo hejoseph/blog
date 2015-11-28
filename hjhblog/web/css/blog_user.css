@@ -71,3 +71,11 @@
  background-color:black;
  color:white;
 }
+
+
+
+
+.row-padding {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}

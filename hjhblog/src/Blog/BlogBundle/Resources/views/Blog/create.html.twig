@@ -2,6 +2,7 @@
 
 {% block body %}
 <div class="container">
+    <h2 class="text-center">Creation d'un blog/article</h2>
     <form action="{{ path('BlogBundle_blog_create') }}" method="post" {{ form_enctype(form) }} class="blogger">
         {{ form_widget(form) }}
         <p>

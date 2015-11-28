@@ -4,6 +4,7 @@
   <li><a href="{{ path('BlogBundle_blogger_profile', {'blogger_id':blogger_id})}}"><i class="fa fa-user"></i> Profile</a></li>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         {% if blogger_id == app.user.id %}
+        <li class=""><a href="{{path('Blog_Bundle_user_dashboard')}}"><span class="glyphicon glyphicon-dashboard">Dashboard</span></a></li>
         <li><a href="{{path('fos_user_security_logout')}}"><i class="fa fa-sign-out"></i> Logout</a></li>
         {% endif %}
     {% endif %}

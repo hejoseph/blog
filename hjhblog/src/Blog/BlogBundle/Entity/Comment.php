@@ -41,15 +41,15 @@ class Comment
     protected $approved;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Blog", inversedBy="comments")
-     * @ORM\JoinColumn(name="blog_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Blog", inversedBy="comments", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      */
     protected $blog;
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Blogger\BloggerBundle\Entity\Blogger", inversedBy="comments")
-     * @ORM\JoinColumn(name="blogger_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Blogger\BloggerBundle\Entity\Blogger", inversedBy="comments", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      */
     protected $blogger;
 

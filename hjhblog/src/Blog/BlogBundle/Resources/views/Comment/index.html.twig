@@ -1,7 +1,13 @@
 {% for comment in comments %}
     <article class="comment {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}">
         <header>
-            <p><span class="highlight">{{ comment.user }}</span> commented <time datetime="{{ comment.created|date('c') }}">{{ comment.created|date('l, F j, Y') }}</time></p>
+            <p><span class="highlight">
+                {% if comment.blogger is empty %}
+                    {{ comment.user }}
+                {% else %}
+                    <a href="{{ path('BlogBundle_blogger_blogs', {'blogger_id':comment.blogger.id}) }}">{{comment.blogger.firstname}} {{comment.blogger.surname}}</a>
+                {% endif %}
+            </span> commented <time datetime="{{ comment.created|date('c') }}">{{ comment.created|date('l, F j, Y') }}</time></p>
         </header>
         <p>{{ comment.comment }}</p>
     </article>

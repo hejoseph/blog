@@ -20,12 +20,12 @@ class Blogger extends BaseUser
     protected $id;
 
     /**
-    * @ORM\OnetoMany(targetEntity="Blog\BlogBundle\Entity\Blog", mappedBy="blogger",cascade={"persist"})
+    * @ORM\OneToMany(targetEntity="Blog\BlogBundle\Entity\Blog", mappedBy="blogger",cascade={"persist"})
     */
     private $blog = array();
 
     /**
-    * @ORM\OnetoMany(targetEntity="Blog\BlogBundle\Entity\Comment", mappedBy="blogger",cascade={"persist"})
+    * @ORM\OneToMany(targetEntity="Blog\BlogBundle\Entity\Comment", mappedBy="blogger",cascade={"persist"})
     */
     private $comments = array();
 
@@ -162,6 +162,20 @@ class Blogger extends BaseUser
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Blog\BlogBundle\Entity\Comment $comment
+     *
+     * @return Comment
+     */
+    public function addComments(\Blog\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+        $comment->setBlogger($this);
+        return $this;
     }
 
     /**

@@ -13,7 +13,7 @@ class BlogController extends Controller
     /**
      * Show a blog entry
      */
-    public function showAction($id, $case = null)
+    public function showAction($id/*, $case = null*/)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -24,12 +24,14 @@ class BlogController extends Controller
 
         $comments = $em->getRepository('BlogBundle:Comment')
                    ->getCommentsForBlog($blog->getId());
-
-        if($case==true){
+        $blog->addPopularity();
+        $em->persist($blog);
+        $em->flush();
+        /*if($case==true){
             return $this->render('BlogBundle:Blog:number_comment.html.twig', array(
             "comments"  => $comments
         ));
-        }
+        }*/
 
         return $this->render('BlogBundle:Blog:show.html.twig', array(
             'blog'      => $blog,
@@ -38,7 +40,6 @@ class BlogController extends Controller
     }
 
     public function editAction($blog_id){
-
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
@@ -52,6 +53,7 @@ class BlogController extends Controller
         if($blog->getBlogger()->getId()!=$user->getId()){
             throw $this->createAccessDeniedException();
         }
+
 
         $form = $this->createForm(new BlogType(), $blog);
 
@@ -132,6 +134,37 @@ class BlogController extends Controller
         $em->remove($blog);
         $em->flush();
         return $this->redirect($this->generateUrl('BlogBundle_homepage'));
+    }
+
+    public function user_dashOperationsAction(){
+        if(isset($_GET["action"]) && isset($_GET["blog_id"])){
+            $blog_ids = $_GET["blog_id"];
+            if($_GET["action"] == "Edit"){
+                if(count($blog_ids) == 1){
+                    return $this->editAction($blog_ids[0]);
+                }
+            }elseif($_GET["action"] == "Remove"){ 
+                return $this->removeBlogs($blog_ids);
+            }
+        }
+        return $this->redirect($this->generateUrl('BlogBundle_homepage'));
+    }
+
+    public function removeBlogs($blog_ids){
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        foreach($blog_ids as $blog_id){
+            $blog = $em->getRepository('BlogBundle:Blog')->find($blog_id);
+            if($blog->getBlogger()->getId()!=$user->getId()){
+                continue;
+            }
+            $em->remove($blog);
+        }
+        $em->flush();
+        return $this->redirect($this->generateUrl('Blog_Bundle_user_dashboard'));
     }
 
 }

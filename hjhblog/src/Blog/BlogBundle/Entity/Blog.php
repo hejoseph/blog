@@ -58,13 +58,13 @@ class Blog
     private $picture;
 
     /**
-    * @ORM\ManytoOne(targetEntity="Category", inversedBy="blogs", cascade={"persist"})
+    * @ORM\ManyToOne(targetEntity="Category", inversedBy="blogs", cascade={"persist"})
     * @ORM\JoinColumn(nullable=true)
     */
     private $category;
 
     /**
-    * @ORM\ManytoOne(targetEntity="Blogger\BloggerBundle\Entity\Blogger", inversedBy="blog")
+    * @ORM\ManyToOne(targetEntity="Blogger\BloggerBundle\Entity\Blogger", inversedBy="blog")
     * @ORM\JoinColumn(nullable=false, name="blogger_id", referencedColumnName="id")
     */
     private $blogger;
@@ -77,9 +77,7 @@ class Blog
     private $tags;
 
     /**
-     * @var string
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="blog")
-     * @ORM\Column(name="comments", type="text")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="blog", cascade={"remove"})
      */
     private $comments = array();
 
@@ -313,19 +311,19 @@ class Blog
         return $this;
     }
 
+    
     /**
-     * Get updated
+     * Add comment
      *
-     * @return \DateTime
+     * @param \Blog\BlogBundle\Entity\Comment $comment
+     *
+     * @return Comment
      */
-    /*public function getUpdated()
-    {
-        return $this->updated;
-    }*/
-
     public function addComment(Comment $comment)
     {
         $this->comments[] = $comment;
+        $comment->setBlog($this);
+        return $this;
     }
 
     
@@ -380,6 +378,11 @@ class Blog
     {
         $this->popularity = $popularity;
 
+        return $this;
+    }
+
+    public function addPopularity(){
+        $this->popularity = $this->popularity+1;
         return $this;
     }
 

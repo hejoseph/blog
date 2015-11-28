@@ -10,13 +10,20 @@ use Blog\BlogBundle\Entity\Blog;
  */
 class CategoryController extends Controller
 {
+
     public function showCategoriesAction(){
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $categories = $em->getRepository('BlogBundle:Category')->findAll();
         // $blogs = $em->getRepository('BlogBundle:Blog')->getBlogsFromString($_GET["search"]);
-
+        $em = $this->getDoctrine()->getEntityManager();
+        $categories = $em->getRepository('BlogBundle:Category')->findAll();
         return $this->render('BlogBundle:Category:show_categories.html.twig', array(
+            'categories'      => $categories
+        ));
+    }
+
+    public function CategoriesHeaderAction(){
+        $em = $this->getDoctrine()->getEntityManager();
+        $categories = $em->getRepository('BlogBundle:Category')->findAll();
+        return $this->render('BlogBundle:Category:header_base.html.twig', array(
             'categories'      => $categories
         ));
     }
