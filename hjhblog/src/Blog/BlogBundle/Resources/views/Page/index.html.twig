@@ -29,13 +29,15 @@
 
             {% include 'BlogBundle:Layout:header_menu_display.html.twig' %}
           <div class="tab-content">
-            <div class="tab-pane active" id="inbox">
+            <div class="tab-pane active" id="sent">
+              <br>
+              {% include 'BlogBundle:Layout:display_list_1_big.html.twig' with { 'blogs': blogs } %}
+            </div>
+            <div class="tab-pane" id="inbox">
               {% include 'BlogBundle:Layout:display_list_3.html.twig' with { 'blogs': blogs } %}
             </div>
             <br/>
-            <div class="tab-pane" id="sent">
-              {% include 'BlogBundle:Layout:display_list_1_big.html.twig' with { 'blogs': blogs } %}
-            </div>
+            
             <div class="tab-pane" id="event">
               {% include 'BlogBundle:Layout:display_list_1_small.html.twig' with { 'blogs': blogs } %}
             </div>

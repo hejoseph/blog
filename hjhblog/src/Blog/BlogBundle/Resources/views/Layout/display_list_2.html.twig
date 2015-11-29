@@ -5,7 +5,15 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
           <div class="item active">
-            <img src="http://placehold.it/800x400?text=IMAGE" alt="Image" height="400" width="800"/>
+            {% if blog.picture is empty %}
+            <img src="http://placehold.it/800x400?text=IMAGE" alt="no picture" height="400" width="800" class="displayblog2" />
+            {% else %}
+              {% if not blog.picture.path is empty %}
+            <img src="{{ asset(blog.picture.AssetPath) }}" alt="{{blog.picture.name}}}" height="400" width="800" class="displayblog2" />
+              {% else %}
+                <img src="http://placehold.it/800x400?text=IMAGE" alt="no picture" height="400" width="800" class="displayblog2" />
+              {% endif %}
+            {% endif %}
             <div class="carousel-caption">
               <h3><a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}">{{blog.title(40)}}...</a></h3>
               <p><span class="glyphicon glyphicon-user"/> <a href="{{ path('BlogBundle_blogger_blogs', {'blogger_id' : blog.blogger.id})}} ">{{blog.blogger.firstname}} {{blog.blogger.surname}}</a></p>

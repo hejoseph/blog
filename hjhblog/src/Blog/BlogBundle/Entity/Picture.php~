@@ -26,14 +26,14 @@ class Picture
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string", length=45)
+     * @ORM\Column(name="path", type="string", length=45, nullable=true)
      */
     private $path;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=45)
+     * @ORM\Column(name="name", type="string", length=45, nullable=true)
      */
     private $name;
 }

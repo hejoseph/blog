@@ -25,7 +25,11 @@
                         <tbody>
                             {% for blogger in bloggers %}
                                 <tr>   
-                                    <td><input type="checkbox" class="blogger_blogger" name="blogger_id[]" value="{{blogger.id}}"></td>
+                                    {% if blogger.role == "admin" %}
+                                    <td><input disabled type="checkbox" class="admin_admin" name="blogger_id[]" value="{{blogger.id}}"></td>
+                                    {% else %}
+                                        <td><input type="checkbox" class="blogger_blogger" name="blogger_id[]" value="{{blogger.id}}"></td>
+                                    {% endif %}
                                     <td>{{blogger.id}}</td>
                                     <td>{{blogger.surname}}</td>
                                     <td>{{blogger.firstname}}</td>

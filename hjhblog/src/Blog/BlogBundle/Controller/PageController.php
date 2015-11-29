@@ -23,7 +23,6 @@ class PageController extends Controller
         $blogs = $em->getRepository('BlogBundle:Blog')
                     ->getLatestBlogs();
 
-        // var_dump($blogs[0]->getComments()[0]);die;
         return $this->render('BlogBundle:Page:index.html.twig', array(
             'blogs' => $blogs
         ));

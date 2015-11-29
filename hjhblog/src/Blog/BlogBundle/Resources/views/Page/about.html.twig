@@ -4,29 +4,36 @@
 
 {% block body %}
     <div class="container "><header>
-        <h1>About This blog</h1>
+        <h1 class="text-center">Ce blog</h1>
     </header>
     <article>
-        <p>Sujet : Création d’un système de gestion d’objet et son API (ex : blog, bibliothèque…)
-Objectifs conceptuels (50%) :
-Utilisation de Symfony (ou tout autre framework MVC)
-Utilisation des templates twigs (ou autre) et des layouts
-Maitrise de l’architecture MVC
-Utilisation des modèles de données avec l’ORM Doctrine (ou autre)
-Objectifs pratiques (50%) :
-Gestion des objets : Afficher tous, Afficher un, Ajouter, Modifier, Supprimer
-Mise en forme CSS à l’aide de Twitter bootstrap
-Déploiement sur cloud / serveur dédié etc.
-Site web fonctionnel, compréhensible
-Modalité de rendu :
-Un repo github avec toutes les sources (sans les dossiers app/cache, app/logs, vendors)
-Une URL (bluemix, dédié ou autre)
-Un email (à respecter précisément) :
-Titre : Cours Web esiea 2015
-Contenu : Lien github / Lien de déploiement puis binome 1 puis binome 2
-Aucun texte en dehors de ce qui est spécifié. Pour les questions envoyez moi un email séparé
-À l’adresse suivante : ancast+esiea15@gmail.com
-</p>
+
+
+    <ul>
+        <li><h1>Utilise symfony</h1></li>
+        <li><h1>Utilise les templates twig et layouts</h1></li>
+        <li><h1>Utilise l'architecture MVC</h1></li>
+        <li><h1>Utilise les modèles de données avec l'ORM Doctrine</h1></li>
+
+        <li><h1>Gère les objets : Afficher tous, Afficher un, Ajouter, Modifier, Supprimer</h1></li>
+        <li><h1>Met en forme à l'aide de Bootsrap</h1></li>
+        <li><h1>Est déployé sur le serveur de production</h1></li>
+        <br>
+        <li><h3>Affiche tous les blogs</h3></li>
+        <li><h3>Affiche Tous les commentaires d'un blog</h3></li>
+        <li><h3>Gère la hiérarchie ROLE_USER ROLE_ADMIN</h3></li>
+        <li><h3>Gère la connexion, l'inscription utilisateur</h3></li>
+        <li><h3>Affiche les données d'un user</h3></li>
+        <li><h3>Laisse uniquement aux membres de créer un blog</h3></li>
+        <li><h3>Laisse tout le monde (inconnu ou utilisateurs connectés) commenter un blog</h3></li>
+        <li><h3>Un utilisateur peut uniquement modifier, supprimer ses blogs et ses données</h3></li>
+        <li><h3>Un blog est supprimé avec ses commentaires</h3></li>
+        <li><h3>Un admin peut modifier ou supprimer les blogs de tout le monde</h3></li>
+        <li><h3>Un admin ne peut supprimer que les utilisateurs normaux</h3></li>
+        <li><h3>Différenciation du dashboard et comportement Admin et User</h3></li>
+        <li><h3>Donne la possibilité de faire une recherche (blogs, auteurs, contenu ... etc )</h3></li>
+        <li><h3>Est user-friendly, grâce à l'utilisation de JQuery</h3></li>
+    </ul>
     </article></div>
-    
+    <br>
 {% endblock %}

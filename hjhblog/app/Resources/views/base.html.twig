@@ -45,7 +45,7 @@
                   <div class="container">
                     <div class="row">
                         <div class="navbar-header">
-                          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                          <button id="buttondublog" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -54,14 +54,14 @@
                         </div>
 
     
-                        <div class="collapse navbar-collapse">
+                        <div id="menudublog" class="collapse navbar-collapse">
                             {% block navigation %}
                             <nav>
                               <ul class="nav navbar-nav">
                                 <li class="active"><a href="{{ path('BlogBundle_homepage') }}">Home</a></li>
                                 <li><a href="{{ path('BlogBundle_about') }}">About</a></li>
-                                <li class="hidden-xs"><a href="#" data-toggle="collapse" data-target="#category-list">Category</a></li>
-                                <li class="visible-xs"><a href="#category-list" data-toggle="collapse" data-target="#category-list">Category</a></li>
+                                <li class="hidden-xs"><a href="#" id="a-cat1" data-toggle="collapse" data-target="#category-list">Category</a></li>
+                                <li class="visible-xs"><a href="#category-list" id="a-cat2" data-toggle="collapse" data-target="#category-list">Category</a></li>
                               </ul>
 
                               <ul class="nav navbar-nav navbar-right">
@@ -190,7 +190,6 @@
         <script src="{{ asset("js/blog.js") }}" type="text/javascript"></script>
         <script src="{{ asset("js/blog_user.js") }}" type="text/javascript"></script>
         <script src="{{ asset('bootstrap-3.3.5-dist/js/bootstrap.js') }}" type="text/javascript"/>
-        
     {% endblock %}
     
 </body>

@@ -45,6 +45,31 @@ $(function () {
         }
     });
 
+    $("#a-cat1").click(function(){
+        if(!$("#category-list").hasClass("show")){
+            $("#category-list").addClass("show");
+        }else{
+            $("#category-list").removeClass("show");
+        }
+    });
+
+    $("#a-cat2").click(function(){
+        if(!$("#category-list").hasClass("show")){
+            $("#category-list").addClass("show");
+        }else{
+            $("#category-list").removeClass("show");
+        }
+    });
+
+    $("#buttondublog").click(function(){
+        if(!$("#menudublog").hasClass("show")){
+            $("#menudublog").addClass("show");
+        } else {
+            $("#menudublog").removeClass("show");
+        }
+        
+    });
+
     // $(main_checkbox).click(function(){
     //     if($(this).is(':checked')){
     //         $(subclass_checkbox).prop("checked",true);

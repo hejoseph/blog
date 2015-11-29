@@ -6,7 +6,15 @@
         <div class="row">
     {% endif %}
         <div class="col-sm-offset-1 col-sm-5">
-            <img width="100" height="100" src="http://placehold.it/800x400?text=Another Image Maybe" alt="Image">
+            {% if not blog.picture is empty%}
+                {% if not blog.picture.path is empty %}
+                    <img width="100" height="100" src="{{asset(blog.picture.AssetPath)}}" alt="Image">
+                {% else %}
+                    <img width="100" height="100" src="http://placehold.it/800x400?text=Another Image Maybe" alt="Image">
+                {% endif %}
+            {% else %}
+                <img width="100" height="100" src="http://placehold.it/800x400?text=Another Image Maybe" alt="Image">
+            {% endif %}
             <h4><a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}">{{ blog.title }}</a></h4>
         </div>
 

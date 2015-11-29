@@ -21,7 +21,6 @@ class BloggerController extends Controller
 
         // the above is a shortcut for this
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        var_dump($user);
 
         return null;
     }

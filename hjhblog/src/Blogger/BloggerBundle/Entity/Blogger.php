@@ -165,6 +165,19 @@ class Blogger extends BaseUser
     }
 
     /**
+     * Get comments
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        if($this->hasRole("ROLE_ADMIN")){
+            return "admin";
+        }
+        return "user";
+    }
+
+    /**
      * Add comment
      *
      * @param \Blog\BlogBundle\Entity\Comment $comment

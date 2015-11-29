@@ -1,12 +1,19 @@
 <div class="row">
   {% for blog in blogs %}
     <div class="row">
+      {% if not blog.picture is empty %}
+        {% if not blog.picture.path is empty%}
       <div class="col-sm-4 ">
-        <a href="#" class="">
-          <img src="http://placehold.it/2560X1280" class="img img-responsive thumbnail">
-        </a>
+          <img src="{{ asset(blog.picture.AssetPath) }}" alt="{{blog.picture.name}}" class="img-responsive ">
+          
       </div>
       <div class="col-sm-8">
+        {% else %}
+          <div class="col-sm-12">
+        {% endif %}
+      {% else %}
+        <div class="col-sm-12">
+      {% endif %}
         <h3 class="title"><a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}"> {{blog.title}}...
           </a>
         </h3>
@@ -18,7 +25,7 @@
           
         </p>
         <br>
-        <p>{{ blog.content }}
+        <p>{{ blog.content(200) }}
         </p>
       </div>
     </div>

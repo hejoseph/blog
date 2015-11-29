@@ -8,6 +8,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Doctrine\ORM\EntityRepository;
 
+use Blog\BlogBundle\Form\PictureType;
+
 class BlogType extends AbstractType
 {   
     /**
@@ -18,6 +20,7 @@ class BlogType extends AbstractType
     {
         $builder
             ->add('title' , 'text')
+            ->add('picture', new PictureType(), array('label' => false))
             ->add('content', 'textarea')
             ->add('category', 'entity', array(
                 'class' => 'BlogBundle:Category',

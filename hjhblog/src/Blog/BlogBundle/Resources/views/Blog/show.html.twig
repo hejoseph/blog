@@ -7,20 +7,29 @@
         <header>
             <div class="date">
                 <time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time>
+                <a href="{{ path('BlogBundle_blogger_blogs', {'blogger_id' : blog.blogger.id})}} ">&nbsp;<span class="glyphicon glyphicon-user"/> {{blog.blogger.firstname}} {{blog.blogger.surname}}</a> <span class="glyphicon glyphicon-fire">   </span> {{blog.popularity}} <span class="glyphicon glyphicon-comment">   </span> {{ blog.comments|length }}
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {% if blog.blogger.id == app.user.id %}
                         <div class="pull-right"><a href="{{ path('BlogBundle_blog_remove', {'blog_id':blog.id}) }}"><span class="glyphicon glyphicon-remove"> </span></a>
                         </div>
+                        &nbsp;
                         <div class="pull-right"><a href="{{ path('BlogBundle_blog_edit', {'blog_id':blog.id}) }}"><span class="glyphicon glyphicon-edit"> </span></a>
                         </div>
 
                     {% endif %}
                 {% endif %}
             </div>
-            <h2>{{ blog.title }}</h2>
+            <h2 class="text-center">{{ blog.title }}</h2>
         </header>
-        <img src="{{ asset(['images/', blog.image]|join) }}" alt="{{ blog.title }} image not found" class="large" />
-        <div>
+        {% if not blog.picture is empty %}
+            {% if not blog.picture.path is empty %}
+        <div class="row">
+            <img src="{{ asset(blog.picture.AssetPath) }}" alt="{{ blog.title }} image not found" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" />
+        </div>
+            {% endif %}
+        {% endif %}
+        <br>
+        <div class="row">
             <p>{{ blog.content|raw }}</p>
         </div>
     </article>

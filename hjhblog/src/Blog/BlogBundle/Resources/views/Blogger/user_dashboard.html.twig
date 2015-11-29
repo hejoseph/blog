@@ -25,7 +25,11 @@
                         {% for blog in blogs %}
                             <tr>   
                                 <td><input type="checkbox" class="user_blogs" name="blog_id[]" value="{{blog.id}}"></td>
-                                <td>{{blog.picture}}</td>
+                                {% if not blog.picture is empty %}
+                                <td> <img width="150px" src="{{ asset(blog.picture.AssetPath) }}" alt="{{blog.picture.name}}" class="img-responsive "></td>
+                                {% else %}
+                                    <td>NULL</td>
+                                {% endif %}
                                 <td>{{blog.title}}</td>
                             </tr>
                         {% else %}

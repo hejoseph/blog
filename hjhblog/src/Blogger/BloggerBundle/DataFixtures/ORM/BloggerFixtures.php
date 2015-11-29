@@ -23,9 +23,9 @@ class BloggerFixtures extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $blogger1 = new Blogger();
-        $blogger1->setUsername('System');
+        $blogger1->setUsername('system');
         $blogger1->setEmail('system@example.com');            
-        $blogger1->setPlainPassword('aze');
+        $blogger1->setPlainPassword('system');
         $blogger1->setRoles(array('ROLE_ADMIN'));
         $blogger1->setEnabled(1);
         $blogger1->setSurname("admin");
@@ -41,9 +41,9 @@ class BloggerFixtures extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($blogger1);
 
         $blogger2 = new Blogger();
-        $blogger2->setUsername('client1');
+        $blogger2->setUsername('client');
         $blogger2->setEmail('client1@example.com');            
-        $blogger2->setPlainPassword('aze');
+        $blogger2->setPlainPassword('client');
         $blogger2->setRoles(array('ROLE_USER'));
         $blogger2->setEnabled(1);
         $blogger2->setSurname("AAA");

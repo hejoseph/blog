@@ -33,28 +33,14 @@ class Blog
     /**
      * @var string
      *
-     * @ORM\Column(name="author", type="string", length=100, nullable=true)
-     */
-    private $author;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=20, nullable=true)
+     * @ORM\OneToOne(targetEntity="Blog\BlogBundle\Entity\Picture", cascade={"persist","remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $image;
-
-    /**
-    * @ORM\OneToOne(targetEntity="Picture", cascade={"persist"})
-    * @ORM\JoinColumn(nullable=true)
-    */
     private $picture;
 
     /**
@@ -68,13 +54,6 @@ class Blog
     * @ORM\JoinColumn(nullable=true)
     */
     private $blogger;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="tags", type="text", nullable=true)
-     */
-    private $tags;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="blog", cascade={"remove"})
@@ -150,29 +129,6 @@ class Blog
             return $this->title;
     }
 
-    /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Blog
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
 
     /**
      * Set content
@@ -201,53 +157,7 @@ class Blog
             return $this->content;
     }
 
-    /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Blog
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
 
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set tags
-     *
-     * @param string $tags
-     *
-     * @return Blog
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-
-        return $this;
-    }
-
-    /**
-     * Get tags
-     *
-     * @return string
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
 
     /**
      * Set comment

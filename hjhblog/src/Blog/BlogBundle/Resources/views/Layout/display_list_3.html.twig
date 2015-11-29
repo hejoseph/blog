@@ -8,7 +8,11 @@
       {% endif %}
       <div class="col-md-4">
         <div>
-          <img src="http://placehold.it/800X800" alt="Texto Alternativo" class="img-responsive img-circle img-thumbnail">
+          {% if not blog.picture is empty %}
+            {% if not blog.picture.path is empty %}
+          <img src="{{ asset(blog.picture.AssetPath) }}" alt="{{blog.picture.name}}}" class="img-responsive img-circle img-thumbnail">
+            {% endif %}
+          {% endif %}
           <h4>
           <a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}"> {{blog.title(40)}}...
           </a>

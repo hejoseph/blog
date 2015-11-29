@@ -51,8 +51,7 @@
                 <div id="my-tab-content" class="tab-content">
                     {% block login_block %}
                         <div class="tab-pane active" id="login">
-                        <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-                    alt="">
+                        <img class='profile-img' src="{{asset('uploads/wechat-android.png')}}" alt="">
                         <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                             <input name="_username" value="{{ last_username }}" id="username" type="text" class="form-control" placeholder="{{ 'security.login.username'|trans }}" required autofocus>
@@ -65,7 +64,6 @@
                             <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
                         </form>
                         <div id="tabs" data-tabs="tabs">
-                            <p class="text-center"><a href="{{path('fos_user_registration_register')}}" data-toggle="tab">Need an Account?</a></p>
                             <p class="text-center"><a href="#select" data-toggle="tab">Forget password</a></p>
                             </div>
                         </div>

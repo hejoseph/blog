@@ -2,7 +2,12 @@
   {% for blog in blogs %}
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object img-thumbnail" width="100" src="http://placehold.it/120x120" alt="...">
+        
+        {% if not blog.picture is empty %}
+            {% if not blog.picture.path is empty %}
+          <img src="{{ asset(blog.picture.AssetPath) }}" width="100" alt="{{blog.picture.name}}}" class="img-responsive ">
+            {% endif %}
+          {% endif %}
       </a>
       <div class="media-body">
         <h4 class="media-heading"><a href="{{ path("BlogBundle_blog_show", {"id": blog.id})}}"> {{blog.title(40)}}...

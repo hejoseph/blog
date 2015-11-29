@@ -4,6 +4,7 @@ namespace Blog\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blog\BlogBundle\Form\BlogType;
+use Blog\BlogBundle\Form\PictureType;
 use Blog\BlogBundle\Entity\Blog;
 /**
  * Blog controller.
@@ -191,7 +192,6 @@ class BlogController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         foreach($blogger_ids as $blogger_id){
             $blogger = $em->getRepository('BloggerBundle:Blogger')->find($blogger_id);
-            var_dump($blogger->getRoles());die;
             if($blogger->hasRole('ROLE_ADMIN')){
                 continue;
             }

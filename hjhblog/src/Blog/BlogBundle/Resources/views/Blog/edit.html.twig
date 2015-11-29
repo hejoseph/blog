@@ -2,13 +2,14 @@
 
 {% block body %}
 <div class="container">
+    <div class="row text-center">
     <form action="{{ path('BlogBundle_blog_edit', { 'blog_id' : blog.id } ) }}" method="post" {{ form_enctype(form) }} class="blogger">
         {{ form_widget(form) }}
         <p>
             <input type="submit" value="Submit">
         </p>
     </form>
-
+    </div>
 </div>
 
 {% endblock %}
