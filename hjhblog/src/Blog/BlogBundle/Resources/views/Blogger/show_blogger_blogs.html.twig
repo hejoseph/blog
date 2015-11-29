@@ -29,7 +29,7 @@
           <div class="tab-content">
             <div class="tab-pane active" id="inbox">
               {% include 'BlogBundle:Layout:display_list_3.html.twig' with { 'blogs': blogs } %}
-              <a type="button" data-toggle="collapse" data-target="#a1">
+              {# <a type="button" data-toggle="collapse" data-target="#a1">
                 <div class="btn-toolbar well well-sm" role="toolbar"  style="margin:0px;">
                   <div class="btn-group">
                     <input type="checkbox">
@@ -56,13 +56,13 @@
               <button class="btn btn-primary btn-xs">
               <i class="fa fa-check-square-o">
               </i> Delete Checked Item's
-              </button>
+              </button> #}
             </div>
             <br/>
             <br/>
             <div class="tab-pane" id="sent">
               {% include 'BlogBundle:Layout:display_list_1_big.html.twig' with { 'blogs': blogs } %}
-              <a type="button" data-toggle="collapse" data-target="#s1">
+              {# <a type="button" data-toggle="collapse" data-target="#s1">
                 <div class="btn-toolbar well well-sm" role="toolbar"  style="margin:0px;">
                   <div class="btn-group">
                     <input type="checkbox">
@@ -78,14 +78,14 @@
                     </div>
                   </div>
                 </div>
-              </a>
-              <div id="s1" class="collapse out well">This is the message body1
+              </a> #}
+              {# <div id="s1" class="collapse out well">This is the message body1
               </div>
               <br>
               <button class="btn btn-primary btn-xs">
               <i class="fa fa-check-square-o">
               </i> Delete Checked Item's
-              </button>
+              </button> #}
             </div>
             <div class="tab-pane" id="event">
               {% include 'BlogBundle:Layout:display_list_1_small.html.twig' with { 'blogs': blogs } %}
@@ -98,7 +98,7 @@
         </div>
       </div>
     </div>
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    {# <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <br/>
@@ -135,6 +135,6 @@
           </form>
         </div>
       </div>
-    </div>
+    </div> #}
   {% endblock %}
 {% endblock %}

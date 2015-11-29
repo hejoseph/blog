@@ -14,7 +14,7 @@
           
           <a href="{{ path('BlogBundle_blogger_blogs', {'blogger_id' : blog.blogger.id})}} "> <span class="glyphicon glyphicon-user"> {{blog.blogger.firstname}} {{blog.blogger.surname}}
           </a> </span> <span class="glyphicon glyphicon-fire">   </span> {{blog.popularity}} <span class="glyphicon glyphicon-comment">   </span> {{ blog.comments|length }}
-          <span class="glyphicon glyphicon-time pull-right"> {{blog.created|date('Y-m-d H:i:s')}}</span>
+          <span class="glyphicon glyphicon-time pull-right"> {{blog.created|date('l, F j, Y H:i:s')}}</span>
           
         </p>
         <br>

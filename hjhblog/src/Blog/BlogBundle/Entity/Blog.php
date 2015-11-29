@@ -65,7 +65,7 @@ class Blog
 
     /**
     * @ORM\ManyToOne(targetEntity="Blogger\BloggerBundle\Entity\Blogger", inversedBy="blog")
-    * @ORM\JoinColumn(nullable=false, name="blogger_id", referencedColumnName="id")
+    * @ORM\JoinColumn(nullable=true)
     */
     private $blogger;
 

@@ -20,7 +20,7 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blog1->setCreated(new \DateTime());
         $blog1->setUpdated($blog1->getCreated());
         $blog1->setPopularity(1);
-        $blog1->setBlogger($manager->merge($this->getReference('blogger-2')));
+        // $blog1->setBlogger($manager->merge($this->getReference('blogger-2')));
         $blog1->addComment($manager->merge($this->getReference('comment-1')));
         $blog1->addComment($manager->merge($this->getReference('comment-2')));
         $blog1->addComment($manager->merge($this->getReference('comment-3')));
@@ -36,7 +36,7 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blog2->setCreated(new \DateTime("2011-07-23 06:12:33"));
         $blog2->setUpdated($blog2->getCreated());
         $blog2->setPopularity(1);
-        $blog2->setBlogger($manager->merge($this->getReference('blogger-2')));
+        // $blog2->setBlogger($manager->merge($this->getReference('blogger-2')));
         $blog2->addComment($manager->merge($this->getReference('comment-4')));
         $blog2->addComment($manager->merge($this->getReference('comment-5')));
         $blog2->addComment($manager->merge($this->getReference('comment-6')));
@@ -52,7 +52,7 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blog3->setCreated(new \DateTime("2011-07-16 16:14:06"));
         $blog3->setUpdated($blog3->getCreated());
         $blog3->setPopularity(2);
-        $blog3->setBlogger($manager->merge($this->getReference('blogger-2')));
+        // $blog3->setBlogger($manager->merge($this->getReference('blogger-2')));
         $blog3->addComment($manager->merge($this->getReference('comment-7')));
         $blog3->addComment($manager->merge($this->getReference('comment-8')));
         $blog3->addComment($manager->merge($this->getReference('comment-9')));
@@ -68,7 +68,7 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blog4->setCreated(new \DateTime("2011-06-02 18:54:12"));
         $blog4->setUpdated($blog4->getCreated());
         $blog4->setPopularity(2);
-        $blog4->setBlogger($manager->merge($this->getReference('blogger-3')));
+        // $blog4->setBlogger($manager->merge($this->getReference('blogger-3')));
         $blog4->addComment($manager->merge($this->getReference('comment-10')));
         $blog4->addComment($manager->merge($this->getReference('comment-11')));
         $blog4->addComment($manager->merge($this->getReference('comment-12')));
@@ -84,10 +84,11 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blog5->setCreated(new \DateTime("2011-04-25 15:34:18"));
         $blog5->setUpdated($blog5->getCreated());
         $blog5->setPopularity(5);
-        $blog5->setBlogger($manager->merge($this->getReference('blogger-4')));
+        // $blog5->setBlogger($manager->merge($this->getReference('blogger-4')));
         $blog5->addComment($manager->merge($this->getReference('comment-13')));
         $blog5->addComment($manager->merge($this->getReference('comment-14')));
         $blog5->addComment($manager->merge($this->getReference('comment-15')));
+        $blog5->addComment($manager->merge($this->getReference('comment-16')));
 
         // $blog5->setCategory($manager->merge($this->getReference('category-2')));
         $manager->persist($blog5);
@@ -105,7 +106,7 @@ class BlogFixtures extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder()
     {
-        return 3;
+        return 2;
     }
 
 }

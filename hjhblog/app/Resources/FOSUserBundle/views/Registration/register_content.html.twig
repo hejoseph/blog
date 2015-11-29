@@ -1,6 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
+{% extends "FOSUserBundle:Security:login.html.twig" %}
 
-<div class="tab-pane" id="register">
+{% block erreur %}
+{% endblock %}
+
+{% block login_block %}
+<div class="tab-pane active" id="register">
 
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'form-signin'}}) }}
     {# {{ form_widget(form) }} #}
@@ -15,16 +20,8 @@
 {{ form_end(form) }}
 
 <div id="tabs" data-tabs="tabs">
-<p class="text-center"><a href="#login" data-toggle="tab">Have an Account?</a></p>
+<p class="text-center"><a href="{{path('fos_user_security_login')}}" data-toggle="tab">Have an Account?</a></p>
 </div>
 </div>
 
-
-
-    {# <form class="" action="" method="">
-        <input type="text" class="form-control" placeholder="User Name ..." required autofocus>
-        <input type="email" class="form-control" placeholder="Emaill Address ..." required>
-        <input type="password" class="form-control" placeholder="Password ..." required>
-        
-    </form> #}
-    
+{% endblock %}

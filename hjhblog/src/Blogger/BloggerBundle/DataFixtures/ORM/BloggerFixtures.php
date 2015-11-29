@@ -26,7 +26,7 @@ class BloggerFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blogger1->setUsername('System');
         $blogger1->setEmail('system@example.com');            
         $blogger1->setPlainPassword('aze');
-        $blogger1->setRoles(array('ROLE_SUPER_ADMIN'));
+        $blogger1->setRoles(array('ROLE_ADMIN'));
         $blogger1->setEnabled(1);
         $blogger1->setSurname("admin");
         $blogger1->setFirstname("admin");
@@ -56,6 +56,7 @@ class BloggerFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blogger2->addComments($manager->merge($this->getReference('comment-4')));
         $blogger2->addComments($manager->merge($this->getReference('comment-5')));
         $blogger2->addComments($manager->merge($this->getReference('comment-6')));
+        $blogger2->addBlog($manager->merge($this->getReference('blog-5')));
         $manager->persist($blogger2);
 
         $blogger3 = new Blogger();
@@ -74,6 +75,7 @@ class BloggerFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blogger3->addComments($manager->merge($this->getReference('comment-7')));
         $blogger3->addComments($manager->merge($this->getReference('comment-8')));
         $blogger3->addComments($manager->merge($this->getReference('comment-9')));
+        $blogger3->addBlog($manager->merge($this->getReference('blog-4')));
         $manager->persist($blogger3);
 
         $blogger4 = new Blogger();
@@ -94,7 +96,9 @@ class BloggerFixtures extends AbstractFixture implements OrderedFixtureInterface
         $blogger4->addComments($manager->merge($this->getReference('comment-12')));
         $blogger4->addComments($manager->merge($this->getReference('comment-13')));
         $blogger4->addComments($manager->merge($this->getReference('comment-14')));
-
+        $blogger4->addBlog($manager->merge($this->getReference('blog-1')));
+        $blogger4->addBlog($manager->merge($this->getReference('blog-2')));
+        $blogger4->addBlog($manager->merge($this->getReference('blog-3')));
         $manager->persist($blogger4);
 
         $manager->flush();
@@ -109,7 +113,7 @@ class BloggerFixtures extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
 
 }

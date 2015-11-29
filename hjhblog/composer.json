@@ -21,7 +21,6 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/data-fixtures" : "dev-master",
         "friendsofsymfony/user-bundle": "~2.0@dev"
-        // "coresphere/console-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

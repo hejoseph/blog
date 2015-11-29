@@ -97,7 +97,7 @@ class Blogger extends BaseUser
     public function addBlog(\Blog\BlogBundle\Entity\Blog $blog)
     {
         $this->blog[] = $blog;
-
+        $blog->setBlogger($this);
         return $this;
     }
 

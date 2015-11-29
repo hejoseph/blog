@@ -49,11 +49,13 @@ class BlogController extends Controller
         if (!$blog) {
             throw $this->createNotFoundException('Unable to find Blog post.');
         }
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-        if($blog->getBlogger()->getId()!=$user->getId()){
-            throw $this->createAccessDeniedException();
-        }
 
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+            if($blog->getBlogger()->getId()!=$user->getId()){
+                throw $this->createAccessDeniedException();
+            }
+        }
 
         $form = $this->createForm(new BlogType(), $blog);
 
@@ -71,6 +73,8 @@ class BlogController extends Controller
                 );
             }
         }
+
+
 
         return $this->render('BlogBundle:Blog:edit.html.twig', array(
             'form' => $form->createView(),
@@ -90,7 +94,6 @@ class BlogController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $blog = new Blog();
 
-        
 
         $form = $this->createForm(new BlogType(), $blog);
 
@@ -133,6 +136,7 @@ class BlogController extends Controller
         }
         $em->remove($blog);
         $em->flush();
+
         return $this->redirect($this->generateUrl('BlogBundle_homepage'));
     }
 
@@ -155,16 +159,115 @@ class BlogController extends Controller
             throw $this->createAccessDeniedException();
         }
         $em = $this->getDoctrine()->getEntityManager();
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-        foreach($blog_ids as $blog_id){
-            $blog = $em->getRepository('BlogBundle:Blog')->find($blog_id);
-            if($blog->getBlogger()->getId()!=$user->getId()){
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+            foreach($blog_ids as $blog_id){
+                $blog = $em->getRepository('BlogBundle:Blog')->find($blog_id);
+                if($blog->getBlogger()->getId()!=$user->getId()){
+                    continue;
+                }
+                $em->remove($blog);
+            }
+        } else {
+            foreach($blog_ids as $blog_id){
+                $blog = $em->getRepository('BlogBundle:Blog')->find($blog_id);
+                $em->remove($blog);
+            }
+        }
+        
+        $em->flush();
+
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            return $this->redirect($this->generateUrl('Blog_Bundle_admin_dashboard'));
+        }
+
+        return $this->redirect($this->generateUrl('Blog_Bundle_user_dashboard'));
+    }
+
+    public function removeBloggers($blogger_ids){
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException();
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+        foreach($blogger_ids as $blogger_id){
+            $blogger = $em->getRepository('BloggerBundle:Blogger')->find($blogger_id);
+            var_dump($blogger->getRoles());die;
+            if($blogger->hasRole('ROLE_ADMIN')){
                 continue;
             }
-            $em->remove($blog);
+            
+            $em->remove($blogger);
         }
         $em->flush();
-        return $this->redirect($this->generateUrl('Blog_Bundle_user_dashboard'));
+
+        return $this->redirect($this->generateUrl('Blog_Bundle_admin_dashboard'));
+    }
+
+    public function admin_dashOperationsAction(){
+        if(isset($_GET["action"])){
+            if(isset($_GET["blogger_id"])){
+                $blogger_ids = $_GET["blogger_id"];
+                if(isset($_GET["action"])){
+                    if($_GET["action"] == "Edit"){
+                        if(count($blogger_ids) == 1){
+                            return $this->redirect($this->generateUrl('BlogBundle_blogger_profile_edit',array(
+                                "blogger_id" => $blogger_ids[0]
+                                )));
+                        }
+                    }elseif($_GET["action"] == "Remove"){ 
+                        return $this->removeBloggers($blogger_ids);
+                    }
+                }
+            }
+
+            // if(isset($_GET["category_id"])){
+            //     $category_ids = $_GET["blog_id"];
+            //     if($_GET["action"] == "Edit"){
+            //         if(count($blog_ids) == 1){
+            //             return $this->editAction($blog_ids[0]);
+            //         }
+            //     }elseif($_GET["action"] == "Remove"){ 
+            //         return $this->removeBlogs($blog_ids);
+            //     }
+            // }
+
+            if(isset($_GET["blog_id"])){
+                $blog_ids = $_GET["blog_id"];
+                if(isset($_GET["action"])){
+                    if($_GET["action"] == "Edit"){
+                        if(count($blog_ids) == 1){
+                            return $this->editAction($blog_ids[0]);
+                        }
+                    }elseif($_GET["action"] == "Remove"){ 
+                        return $this->removeBlogs($blog_ids);
+                    }
+                }
+            }
+
+            if(isset($_GET["comment_id"])){
+                $comment_ids = $_GET["comment_id"];
+                if(isset($_GET["action"]) && $_GET["action"] == "Remove"){ 
+                    return $this->removeComments($comment_ids);
+                }
+            }
+        }
+
+        return $this->redirect($this->generateUrl('BlogBundle_blog_admin_dashOperations'));
+    }
+
+
+    public function removeComments($comment_ids){
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException();
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+        foreach($comment_ids as $comment_id){
+            $comment = $em->getRepository('BlogBundle:Comment')->find($comment_id);
+            $em->remove($comment);
+        }
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('Blog_Bundle_admin_dashboard'));
     }
 
 }

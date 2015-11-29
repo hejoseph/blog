@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="row">
-        {# <form action="{{path('BlogBundle_blog_user_dashOperations')}}" method="get"> #}
+        <form action="{{path('BlogBundle_blog_admin_dashOperations')}}" method="get">
         <div class="panel panel-danger">
             <div class="panel-heading">
                 <div class="row">
@@ -16,7 +16,7 @@
                     <table class="table" id="table">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" id="main_checkbox" ></th>
+                                <th><input type="checkbox" id="main_checkbox_blogger" ></th>
                                 <th>ID</th>
                                 <th>SURNAME</th>
                                 <th>FIRSTNAME</th>
@@ -48,11 +48,11 @@
                 </div>
             </div>
         </div>
-    {# </form> #}
+    </form>
     </div>
 
-    <div class="row">
-        {# <form action="{{path('BlogBundle_blog_user_dashOperations')}}" method="get"> #}
+    {# <div class="row">
+        <form action="{{path('BlogBundle_blog_admin_dashOperations')}}" method="get">
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="row">
@@ -66,7 +66,7 @@
                     <table class="table" id="table">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" id="main_checkbox" ></th>
+                                <th><input type="checkbox" id="main_checkbox_category" ></th>
                                 <th>ID</th>
                                 <th>NAME</th>
                             </tr>
@@ -96,12 +96,12 @@
                 </div>
             </div>
         </div>
-    {# </form> #}
-    </div>
+    </form>
+    </div> #}
 
 
     <div class="row">
-        {# <form action="{{path('BlogBundle_blog_user_dashOperations')}}" method="get"> #}
+        <form action="{{path('BlogBundle_blog_admin_dashOperations')}}" method="get">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="row">
@@ -115,11 +115,11 @@
                     <table class="table" id="table">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" id="main_checkbox" ></th>
+                                <th><input type="checkbox" id="main_checkbox_blog" ></th>
                                 <th>ID</th>
                                 <th>BLOG TITTLE</th>
                                 <th>CATEGORY</th>
-                                <th>BLOGGER/AUTHOR</th>
+                                <th>BLOGGER NAME</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -149,28 +149,32 @@
                 </div>
             </div>
         </div>
-    {# </form> #}
+    </form>
     </div>
 
     <div class="row">
-        {# <form action="{{path('BlogBundle_blog_user_dashOperations')}}" method="get"> #}
+        <form action="{{path('BlogBundle_blog_admin_dashOperations')}}" method="get">
         <div class="panel panel-success">
-            {# <div class="panel-heading">
+            <div class="panel-heading">
                 <div class="row">
                     <h3 class="panel-title text-center">DASHBOARD COMMENT</h3>
                     
                 </div>
-            </div> #}
-           {#  <div class="panel-body">
+            </div>
+            <div class="panel-body">
             <div class="row">
                 <div class="col-lg-12">
                     <table class="table" id="table">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" id="main_checkbox" ></th>
+                                <th><input type="checkbox" id="main_checkbox_comment" ></th>
                                 <th>COMMENT ID</th>
+                                <th>COMMENT</th>
                                 <th>BLOG ID</th>
+                                <th>BLOG TITLE</th>
                                 <th>BLOGER ID</th>
+                                <th>BLOGER NAME</th>
+                                <th>Anonymous name</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -178,9 +182,29 @@
                                 <tr>   
                                     <td><input type="checkbox" class="comment_comment" name="comment_id[]" value="{{comment.id}}"></td>
                                     <td>{{comment.id}}</td>
-                                    <td>NULL</td>
+                                    <td>{{comment.comment}}</td>
+                                    <td>{{comment.blog.id}}</td>
+                                    <td>{{comment.blog.title}}</td>
                                     <td>
-                                        {{comment.blogger}}}
+                                        {% if not comment.blogger is empty %}
+                                            {{comment.blogger.id}}
+                                        {% else %}
+                                            NULL
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if not comment.blogger is empty %}
+                                            {{comment.blogger.firstname}} {{comment.blogger.surname}}
+                                        {% else %}
+                                            NULL
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if not comment.blogger is empty %}
+                                            NULL
+                                        {% else %}
+                                            {{comment.user}}
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% else %}
@@ -193,15 +217,15 @@
                 </div>
             </div>
 
-            </div>  #}
+            </div> 
             <div class="panel-footer clearfix">
                 <div class="pull-right">
-                    <input type="submit" id="edit_dash" name="action" class="btn btn-primary hide" value="Edit"></input>
-                    <input type="submit" id="remove_dash" name="action" class="btn btn-danger hide" value="Remove"></input>
+                    {# <input type="submit" id="edit_comment" name="action" class="btn btn-primary hide" value="Edit"></input> #}
+                    <input type="submit" id="remove_comment" name="action" class="btn btn-danger hide" value="Remove"></input>
                 </div>
             </div>
         </div>
-    {# </form> #}
+    </form>
     </div>
 
     

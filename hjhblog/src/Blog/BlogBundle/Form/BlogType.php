@@ -6,8 +6,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Doctrine\ORM\EntityRepository;
+
 class BlogType extends AbstractType
-{
+{   
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -17,10 +19,15 @@ class BlogType extends AbstractType
         $builder
             ->add('title' , 'text')
             ->add('content', 'textarea')
-           
-        ;
-    }
+            ->add('category', 'entity', array(
+                'class' => 'BlogBundle:Category',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.name', 'ASC');
+                },
+        ));
     
+    }
     /**
      * @param OptionsResolverInterface $resolver
      */

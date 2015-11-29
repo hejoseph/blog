@@ -4,8 +4,6 @@
 namespace Blog\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Blog\BlogBundle\Entity\Enquiry;
-use Blog\BlogBundle\Form\EnquiryType;
 
 use Blog\BlogBundle\Entity\Search;
 use Blog\BlogBundle\Form\SearchType;
@@ -81,17 +79,6 @@ class PageController extends Controller
 
     }
 
-    public function profileAction($blogger_id){
-        $em = $this->getDoctrine()
-                   ->getEntityManager();
-        $blogger = $em->getRepository('BloggerBundle:Blogger')->find($blogger_id);
-        if (!$blogger) {
-            throw $this->createNotFoundException('Unable to find the Blogger, he doesn\'t exist.');
-        }
-        return $this->render('BlogBundle:Blogger:profile.html.twig', array(
-            'blogger'    => $blogger
-        ));
-    }
 
     public function bloggerDashboardAction($blogger_id){
         $em = $this->getDoctrine()

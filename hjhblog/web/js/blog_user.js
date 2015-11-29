@@ -1,46 +1,94 @@
 $(function () {
 
-    $("#main_checkbox").click(function(){
-        if($(this).is(':checked')){
-            $(".user_blogs").prop("checked",true);
-            $("#remove_dash").removeClass("hide");
-        } else {
-            $(".user_blogs").prop("checked",false);
-            $("#remove_dash").addClass("hide");
-            $("#edit_dash").addClass("hide");
-        }
+    var main_checkbox = "#main_checkbox";
+    var subclass_checkbox = ".user_blogs";
+    var id_edit = "#edit_dash";
+    var id_remove = "#remove_dash";
 
-        if($(".user_blogs:checked").size() == 1){
-            $("#remove_dash").removeClass("hide");
-            $("#edit_dash").removeClass("hide");
-        } else if($(".user_blogs:checked").size() > 1) {
-            $("#edit_dash").addClass("hide");
-        } else {
-            $("#remove_dash").addClass("hide");
+    dashboard_buttons(main_checkbox,subclass_checkbox,id_edit,id_remove);
+
+    var main_checkbox = "#main_checkbox_blogger";
+    var subclass_checkbox = ".blogger_blogger";
+    var id_edit = "#edit_blogger";
+    var id_remove = "#remove_blogger";
+
+    dashboard_buttons(main_checkbox,subclass_checkbox,id_edit,id_remove);
+
+    var main_checkbox = "#main_checkbox_blog";
+    var subclass_checkbox = ".blog_blog";
+    var id_edit = "#edit_blog";
+    var id_remove = "#remove_blog";
+
+    dashboard_buttons(main_checkbox,subclass_checkbox,id_edit,id_remove);
+
+    var main_checkbox = "#main_checkbox_category";
+    var subclass_checkbox = ".category_category";
+    var id_edit = "#edit_category";
+    var id_remove = "#remove_category";
+
+    dashboard_buttons(main_checkbox,subclass_checkbox,id_edit,id_remove);
+
+    var main_checkbox = "#main_checkbox_comment";
+    var subclass_checkbox = ".comment_comment";
+    var id_edit = "";
+    var id_remove = "#remove_comment";
+
+    dashboard_buttons(main_checkbox,subclass_checkbox,id_edit,id_remove);
+
+    $("#myTab li").click(function(){
+        if(!$(this).hasClass("pull-right")){
+            $("#myTab li").removeClass("active");
+            $(this).addClass("active");
+            var id = $(this).children().attr("href");
+            $(".tab-pane").removeClass("active");
+            $(id).addClass("active");
         }
     });
 
-    $(".user_blogs").click(function(){
-        if($(this).is(":checked")){
-        } else {
-            $("#main_checkbox").prop("checked",false);
-        }
+    // $(main_checkbox).click(function(){
+    //     if($(this).is(':checked')){
+    //         $(subclass_checkbox).prop("checked",true);
+    //         $(id_remove).removeClass("hide");
+    //     } else {
+    //         $(subclass_checkbox).prop("checked",false);
+    //         $(id_remove).addClass("hide");
+    //         $(id_edit).addClass("hide");
+    //     }
 
-        if($(".user_blogs:checked").size() == $(".user_blogs").size()){
-            $("#main_checkbox").prop("checked",true);
-        }
+    //     if($(subclass_checkbox+":checked").size() == 1){
+    //         $(id_remove).removeClass("hide");
+    //         $(id_edit).removeClass("hide");
+    //     } else if($(subclass_checkbox+":checked").size() > 1) {
+    //         $(id_edit).addClass("hide");
+    //     } else {
+    //         $(id_remove).addClass("hide");
+    //     }
+    // });
 
-        if($(".user_blogs:checked").size() == 1){
-            $("#remove_dash").removeClass("hide");
-            $("#edit_dash").removeClass("hide");
-        } else {
-            $("#edit_dash").addClass("hide");
-        }
+    // $(subclass_checkbox).click(function(){
+    //     if($(this).is(":checked")){
+    //     } else {
+    //         $(main_checkbox).prop("checked",false);
+    //     }
 
-        if($(".user_blogs:checked").size() == 0){
-            $("#remove_dash").addClass("hide");
-        }
-    });
+    //     if($(subclass_checkbox+":checked").size() == $(subclass_checkbox).size()){
+    //         $(main_checkbox).prop("checked",true);
+    //     }
+
+    //     if($(subclass_checkbox+":checked").size() == 1){
+    //         $(id_remove).removeClass("hide");
+    //         $(id_edit).removeClass("hide");
+    //     } else {
+    //         $(id_edit).addClass("hide");
+    //     }
+
+    //     if($(subclass_checkbox+":checked").size() == 0){
+    //         $(id_remove).addClass("hide");
+    //     }
+    // });
+
+
+
 
     // $( '#table' ).searchable({
     //     striped: true,
@@ -65,3 +113,47 @@ $(function () {
 
     // $('#myTab a:last').tab('show');
 });
+
+function dashboard_buttons(main_checkbox,subclass_checkbox,id_edit,id_remove){
+    $(main_checkbox).click(function(){
+        if($(this).is(':checked')){
+            $(subclass_checkbox).prop("checked",true);
+            $(id_remove).removeClass("hide");
+        } else {
+            $(subclass_checkbox).prop("checked",false);
+            $(id_remove).addClass("hide");
+            $(id_edit).addClass("hide");
+        }
+
+        if($(subclass_checkbox+":checked").size() == 1){
+            $(id_remove).removeClass("hide");
+            $(id_edit).removeClass("hide");
+        } else if($(subclass_checkbox+":checked").size() > 1) {
+            $(id_edit).addClass("hide");
+        } else {
+            $(id_remove).addClass("hide");
+        }
+    });
+
+    $(subclass_checkbox).click(function(){
+        if($(this).is(":checked")){
+        } else {
+            $(main_checkbox).prop("checked",false);
+        }
+
+        if($(subclass_checkbox+":checked").size() == $(subclass_checkbox).size()){
+            $(main_checkbox).prop("checked",true);
+        }
+
+        if($(subclass_checkbox+":checked").size() == 1){
+            $(id_remove).removeClass("hide");
+            $(id_edit).removeClass("hide");
+        } else {
+            $(id_edit).addClass("hide");
+        }
+
+        if($(subclass_checkbox+":checked").size() == 0){
+            $(id_remove).addClass("hide");
+        }
+    });
+}

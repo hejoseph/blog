@@ -17,9 +17,12 @@ class BloggerType extends AbstractType
         $builder
             ->add('surname')
             ->add('firstname')
+            ->add('dateOfBirth')
             ->add('country')
+            ->add('gender')
             ->add('address')
             ->add('zipcode')
+            ->add('email')
         ;
     }
     
@@ -29,7 +32,7 @@ class BloggerType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Blog\BlogBundle\Entity\Blog'
+            'data_class' => 'Blogger\BloggerBundle\Entity\Blogger'
         ));
     }
 

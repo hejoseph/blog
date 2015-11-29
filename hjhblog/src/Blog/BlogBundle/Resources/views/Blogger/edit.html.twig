@@ -1,0 +1,22 @@
+{% extends 'BlogBundle:Blogger:profile.html.twig' %}
+
+{% block blogger_body %}
+<div class="tab-pane active" id="register">
+    
+    {{ form_start(form, {'method': 'post', 'action': path('BlogBundle_blogger_profile_edit',{'blogger_id':blogger.id}), 'attr': {'class': 'form-signin'}}) }}
+        {# {{ form_widget(form) }} #}
+        {{ form_row(form.surname, {'label':'Surname','attr':{'class': 'form-control','type':'texte'}}) }}
+        {{ form_row(form.firstname, {'label':'Firstname','attr':{'class': 'form-control','type':'texte'}}) }}
+        {{ form_row(form.dateOfBirth, {'label':'Date Of Birth','attr':{'class': 'form-control','type':'texte'}}) }}
+        {{ form_row(form.country, {'label':'Gender','attr':{'class': 'form-control','type':'texte'}}) }}
+        {{ form_row(form.gender, {'label':'Gender','attr':{'class': 'form-control','type':'texte'}}) }}
+        {{ form_row(form.address, {'label':'Address','attr':{'class': 'form-control','type':'texte'}}) }}
+        {{ form_row(form.zipcode, {'label':'Zipcode','attr':{'class': 'form-control','type':'texte'}}) }}
+        {{ form_row(form.email, {'label':'Email','attr':{'class': 'form-control','type':'email'}}) }}
+        <br/>
+        <div>
+            <input type="submit" class="btn btn-lg btn-default btn-block" value="Submit" />
+        </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

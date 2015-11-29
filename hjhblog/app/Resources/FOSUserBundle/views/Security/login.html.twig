@@ -12,9 +12,11 @@
 
 
     {# <div class="container"> #}
+{% block erreur %}
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
+{% endblock %}
 {# <form action="{{ path("fos_user_security_check") }}" method="post">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
@@ -61,17 +63,15 @@
                             <br>
                             <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
                             <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-
-
                         </form>
                         <div id="tabs" data-tabs="tabs">
-                            <p class="text-center"><a href="#register" data-toggle="tab">Need an Account?</a></p>
+                            <p class="text-center"><a href="{{path('fos_user_registration_register')}}" data-toggle="tab">Need an Account?</a></p>
                             <p class="text-center"><a href="#select" data-toggle="tab">Forget password</a></p>
                             </div>
                         </div>
 
-                        {% render(controller('FOS\UserBundle:Registration:register')) %}
-
+                        {# {% render(controller('FOS\UserBundle:Registration:register')) %} #}
+                        <p class="text-center"><a href="{{path('fos_user_registration_register')}}">Need an Account?</a></p>
                         {% render(controller('FOS\UserBundle:Resetting:request')) %}
                         
                     </div>

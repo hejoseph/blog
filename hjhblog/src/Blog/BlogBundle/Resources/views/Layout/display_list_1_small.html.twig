@@ -15,7 +15,7 @@
       <br>
       <p>
         <span class="glyphicon glyphicon-fire">   </span> {{blog.popularity}} <span class="glyphicon glyphicon-comment">   </span> {{ blog.comments|length }}
-        <span class="glyphicon glyphicon-time pull-right"> {{blog.created|date('Y-m-d H:i:s')}}</span>
+        <span class="glyphicon glyphicon-time pull-right"> {{blog.created|date('l, F j, Y H:i:s')}}</span>
       </p>
     </div>
     {% if loop.last %}

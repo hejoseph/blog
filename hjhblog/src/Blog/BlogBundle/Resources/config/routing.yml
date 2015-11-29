@@ -37,6 +37,12 @@ BlogBundle_blog_user_dashOperations:
         methods:  GET|POST
         # blog_id: \d+
 
+BlogBundle_blog_admin_dashOperations:
+    pattern:  /admin_op
+    defaults: { _controller: BlogBundle:Blog:admin_dashOperations }
+    requirements:
+        methods:  GET
+
 BlogBundle_blog_edit:
     pattern: /blog/{blog_id}/edit
     defaults: { _controller: BlogBundle:Blog:edit }
@@ -67,7 +73,14 @@ BlogBundle_blogger_blogs:
 
 BlogBundle_blogger_profile:
     pattern:  /blogger/{blogger_id}/profile
-    defaults: { _controller: BlogBundle:Page:profile }
+    defaults: { _controller: BlogBundle:Blogger:profile }
+    requirements:
+        methods:  GET
+        id: \d+
+
+BlogBundle_blogger_profile_edit:
+    pattern:  /blogger/{blogger_id}/profile/edit
+    defaults: { _controller: BlogBundle:Blogger:edit }
     requirements:
         methods:  GET
         id: \d+

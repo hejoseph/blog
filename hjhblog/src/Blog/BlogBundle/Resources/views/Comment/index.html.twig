@@ -7,7 +7,7 @@
                 {% else %}
                     <a href="{{ path('BlogBundle_blogger_blogs', {'blogger_id':comment.blogger.id}) }}">{{comment.blogger.firstname}} {{comment.blogger.surname}}</a>
                 {% endif %}
-            </span> commented <time datetime="{{ comment.created|date('c') }}">{{ comment.created|date('l, F j, Y') }}</time></p>
+            </span> commented <time datetime="{{ comment.created|date('c') }}">{{ comment.created|date('l, F j, Y H:i:s') }}</time></p>
         </header>
         <p>{{ comment.comment }}</p>
     </article>
