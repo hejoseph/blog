@@ -39,8 +39,10 @@ class CommentController extends Controller
         if ($form->isValid()) {
            $em = $this->getDoctrine()
                        ->getEntityManager();
-            $user = $this->get('security.token_storage')->getToken()->getUser();
-            $user->addComments($comment);
+           if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+                $user = $this->get('security.token_storage')->getToken()->getUser();
+                $user->addComments($comment);
+            }
             $blog->addComment($comment);
             $em->persist($comment);
             $em->flush();
